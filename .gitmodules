@@ -1,0 +1,3 @@
+[submodule "Resources/libs"]
+	path = Resources/libs
+	url = https://rndwww.nce.amadeus.net/git/scm/pur/pay_ui_libraries.git
