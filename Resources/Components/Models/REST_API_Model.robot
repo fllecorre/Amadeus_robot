@@ -65,5 +65,12 @@ REST_Create_Card
     [Arguments]    ${USER}    ${body_filename}   
     REST_Request    POST    ${USER}    ${REST_virtual_cards_URI}    ${EXECDIR}/${bodies_path}/${body_filename}
     REST_Check_Status_From_Response    201
+    ${vcn_id}    REST_Get_Value_From_Response_byJsonPath      $.data.id
+    RETURN    ${vcn_id}
+
+REST_Get_Card_Info
+    [Arguments]    ${USER}    ${VCN_ID}   
+    REST_Request    GET    ${USER}    ${REST_virtual_cards_URI}/${VCN_ID}    
+    REST_Check_Status_From_Response    200
     ${response}    REST_Get_Value_From_Response_byJsonPath      $.data
     RETURN    ${response}
