@@ -3,7 +3,10 @@ Library    Collections
 Library    JSONLibrary
 Variables   ../REST_data/REST_variables.py 
 Library     ../../../Resources/libs/lss_token_generator.py
-Library     REST    ${REST_base_url}[${PHASE}]
+Library     ../../../Resources/libs/jwt_generation.py
+Library     REST
+Library     DebugLibrary    
+Library    ../../libs/jwt_generation.py
 
 *** Keywords ***
 REST_Create_Token
@@ -12,18 +15,27 @@ REST_Create_Token
     ${token}    Get 1 A Auth Token    ${user}
     Set Global Variable    ${token} 
 
+REST_Create_JWT_Token
+    [Documentation]  Create a token needed for request authorization  orga, officeId, userId, password
+    [Arguments]    ${user}
+    Log Dictionary    ${user}
+    ${jwt}    jwt_generation.authenticate    ${user}[user]    ${user}[pwd]
+    ${token}    jwt_generation.getattr    token    ${jwt}
+    RETURN    ${token} 
+
 REST_Request
     [Documentation]  Send a request to the specified endpoint (URI) 
     ...    Parameters :
     ...    - ${method} : POST, GET, PATCH or DELETE
+    ...    - ${USER}
     ...    - ${URI} : Uniform Resource Identifier
     ...    - ${body} : data to send
      [Arguments]    ${method}    ${USER}    ${URI}    ${body}=None
-    REST_Create_Token    ${USER} 
+    ${token}    REST_Create_JWT_Token    ${USER} 
     Log To Console    method = ${method}, URI =${URI}, data=${body}
     Log Many    method = ${method}    URI =${URI}    data=${body}
     #Headers preparation
-    &{headers}    Create Dictionary    Authorization=1Aauth ${token}   Content-Type=application/json
+    &{headers}    Create Dictionary    Authorization=Bearer ${token}   Content-Type=application/json
     Log Dictionary    ${headers}  
     # Set Headers    ${headers} 
     #Sending request 
