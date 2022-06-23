@@ -1,0 +1,41 @@
+*** Settings ***
+Library    Collections
+Library    JSONLibrary
+Library           ../../../Resources/libs/lss_token_generator.py 
+Resource    REST_API_Model.robot
+Variables       ../../../Resources/libs/test_users.py
+Library     deepdiff
+Library    
+
+*** Variables ***
+
+${qaproxy_base_url}    https://qaproxy.forge.amadeus.net/api   
+${l_file_provider_path}    /ama/obe/${PHASE}/aps/vcp/data/vcp/Providers/${provider}
+
+*** Keywords ***
+Get VCN BOM
+    [Arguments]    ${USER}    ${PHASE}    ${VCN_ID}        
+    ${json_response}    REST_Request    GET    ${USER}    ${qaproxy_base_url}/tool/db/getVCNBlob/${PHASE}/${VCN_ID}
+    REST_Check_Status_From_Response    200
+    RETURN    ${json_response}[body]
+
+Check VCN BLOB
+    [Arguments]    ${BOM}    ${BOM_expected}
+    ${result}    Evaluate    deepdiff.DeepDiff(${BOM}, ${BOM_expected})
+    ${status}    Run Keyword And Return Status    Should Be Empty    ${result}
+    IF    ${status} == ${False}    Fail    Differences between expected and received BOM : \n ${result}
+    
+Get File Content
+    [Arguments]    ${USER}    ${PHASE}    ${directory}    ${filename} 
+    ${file_content}    REST_Request    GET    ${USER}    ${qaproxy_base_url}/tool/fs/catFile/${PHASE}/${l_file_provider_path}/${directory}/${filename} 
+    RETURN    ${file_content} 
+
+Check File Location
+    [Arguments]    ${USER}    ${PHASE}    ${directory}    ${filename} 
+    ${files_list}     REST_Request    GET    ${FLECORRE}    ${qaproxy_base_url}/tool/fs/listDirectory/${PHASE}/${l_file_provider_path}/${directory} 
+    IF    ${filename} in ${files_list}
+        ${file_content}    Get_File_Content    ${USER}    ${PHASE}    $${directory}     ${filename}
+        ${length}    Get Length      ${file_content}    
+        IF    ${length} == 0    Fail    File is empty!    ELSE    RETURN    File found !
+    END
+

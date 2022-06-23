@@ -1,0 +1,30 @@
+{
+    "data": {
+        "configuration": {
+            "schema": {
+                "projection": {
+                    "Timestamp": "",
+                    "VCNID": "",
+                    "ExternalCardReference": "",
+                    "LinkCode": "",
+                    "TransactionType": "",
+                    "Amount": "",
+                    "Currency": "",
+                    "ForexFeeAmount": "",
+                    "ForexFeeCurrency": "",
+                    "LinkResponse": "",
+                    "Status": ""
+                },
+                "sort": {
+                    "fieldId": "",
+                    "order": ""
+                },
+                "filter": "" 
+            }
+        },
+        "timeRange": {
+            "startFrom": "",
+            "spanTo": ""
+        }
+    }
+}
