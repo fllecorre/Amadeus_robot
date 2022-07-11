@@ -4,38 +4,41 @@ Library    JSONLibrary
 Variables   ../REST_data/REST_variables.py 
 Library     ../../../Resources/libs/lss_token_generator.py
 Library     ../../../Resources/libs/jwt_generation.py
-Library     REST
-Library     DebugLibrary    
-Library    ../../libs/jwt_generation.py
+Library     REST    
 
 *** Keywords ***
 REST_Create_Token
     [Documentation]  Create a token needed for request authorization  
-    [Arguments]    ${user}
-    ${token}    Get 1 A Auth Token    ${user}
-    Set Global Variable    ${token} 
+    [Arguments]    ${user}    ${phase}    ${token_type}
+    IF    '${token_type}' == 'LSS_Bearer'
+        ${token}    getBearerToken   ${phase}    ${user}
+        ${authorization}    Set Variable    Bearer ${token}
+    ELSE IF    '${token_type}' == 'JWT'
+        ${jwt}    jwt_generation.authenticate    ${user}[user]    ${user}[pwd]
+        ${jwt_token}    jwt_generation.getattr    token    ${jwt}
+        ${authorization}    Set Variable    Bearer ${jwt_token}
+    ELSE IF    '${token_type}' == 'LSS_1Aauth'
+        ${token}    Get 1 A Auth Token    ${user}
+        ${authorization}    Set Variable    1Aauth ${token}
+    END
+    RETURN    ${authorization} 
 
-REST_Create_JWT_Token
-    [Documentation]  Create a token needed for request authorization  orga, officeId, userId, password
-    [Arguments]    ${user}
-    Log Dictionary    ${user}
-    ${jwt}    jwt_generation.authenticate    ${user}[user]    ${user}[pwd]
-    ${token}    jwt_generation.getattr    token    ${jwt}
-    RETURN    ${token} 
 
 REST_Request
     [Documentation]  Send a request to the specified endpoint (URI) 
     ...    Parameters :
     ...    - ${method} : POST, GET, PATCH or DELETE
     ...    - ${USER}
+    ...    - ${token_type} : LSS or JWT or 1A
     ...    - ${URI} : Uniform Resource Identifier
     ...    - ${body} : data to send
-     [Arguments]    ${method}    ${USER}    ${URI}    ${body}=None
-    ${token}    REST_Create_JWT_Token    ${USER} 
+     [Arguments]    ${method}    ${USER}    ${token_type}    ${URI}    ${body}=None
     Log To Console    method = ${method}, URI =${URI}, data=${body}
     Log Many    method = ${method}    URI =${URI}    data=${body}
+    ${authorization}     REST_Create_Token    ${USER}    ${PHASE}    ${token_type}
     #Headers preparation
-    &{headers}    Create Dictionary    Authorization=Bearer ${token}   Content-Type=application/json
+    &{headers}    Create Dictionary    Authorization=${authorization}   Content-Type=application/vnd.amadeus+json    Accept=application/vnd.amadeus+json,text/html    timeout=20    maxSize=40960000
+    #&{headers}    Create Dictionary    Authorization=${authorization}   Content-Type=application/json       
     Log Dictionary    ${headers}  
     # Set Headers    ${headers} 
     #Sending request 
@@ -74,15 +77,17 @@ REST_Get_Value_From_Response_byJsonPath
     RETURN    ${value}[0]
 
 REST_Create_Card
-    [Arguments]    ${USER}    ${body_filename}   
-    REST_Request    POST    ${USER}    ${REST_virtual_cards_URI}    ${EXECDIR}/${bodies_path}/${body_filename}
+    [Arguments]    ${USER}    ${body_filename}
+    ${baseURL}    Set Variable    ${REST_base_url}[${PHASE}]     
+    REST_Request    POST    ${USER}    LSS_1Aauth    ${baseURL}${REST_virtual_cards_URI}    ${EXECDIR}/${bodies_path}/${body_filename}   
     REST_Check_Status_From_Response    201
     ${vcn_id}    REST_Get_Value_From_Response_byJsonPath      $.data.id
     RETURN    ${vcn_id}
 
 REST_Get_Card_Info
-    [Arguments]    ${USER}    ${VCN_ID}   
-    REST_Request    GET    ${USER}    ${REST_virtual_cards_URI}/${VCN_ID}    
+    [Arguments]    ${USER}    ${VCN_ID}  
+    ${baseURL}    Set Variable    ${REST_base_url}[${PHASE}] 
+    REST_Request    GET    ${USER}    LSS_1Aauth    ${baseURL}${REST_virtual_cards_URI}/${VCN_ID}    
     REST_Check_Status_From_Response    200
     ${response}    REST_Get_Value_From_Response_byJsonPath      $.data
     RETURN    ${response}

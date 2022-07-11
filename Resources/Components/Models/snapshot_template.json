@@ -1,0 +1,15 @@
+{
+    "data": {
+        "configuration": {
+            "schema": {
+                "projection": "",
+                "sort": "",
+                "filter": ""
+            }
+        },
+        "timeRange": {
+            "startFrom": "",
+            "spanTo": ""
+        }
+    }
+}
