@@ -2,11 +2,11 @@
 Resource        ../Resources/Components/Models/REST_API_Model.robot
 Resource        ../Resources/Components/Models/QA_Proxy_Model.robot
 Resource        ../Resources/Components/Models/XPP_Report_Model.robot
-
+Variables        ../Resources/Components/Models/snapshot_data.py
 
 *** Variables ***
 ${PHASE}    DEV
-${USER}    ${APPUI1A01}
+${USER}    ${FLECORRE}
 ${provider}    Apiso 
 
 *** Test Cases ***
@@ -15,8 +15,6 @@ ${provider}    Apiso
     ${vcn_id}    REST_Create_Card   ${APPUI1A01}    POST_new_VCN_full.json
     ${card_info}    REST_Get_Card_Info   ${APPUI1A01}     ${vcn_id}    
     Log    ${card_info}  
-    ${vcn_trid}    REST_Get_Value_From_Response_byJsonPath    $.history.[0].id    ${card_info}
-    Log To Console    ${vcn_trid}
 
 #Get & Check BLOB (to rework)
 02_GetCardBLOB
@@ -34,17 +32,14 @@ ${provider}    Apiso
 
 #AppEvent Generation (CAPLAQ)
 
-04_XPP_Reporting
-    @{list}    Create List    aa     bb     cc     dd     ee     ff     gg  
+#XPP Reporting => Create & POST Snapshot
+03_XPP_Reporting_Create_Post_Snapshot
+    @{list}    Create List    aa     bb     cc     dd     ee     ff     gg     
     ${snapshot}    Create Snapshot    ${list}
-    POST Snapshot    ${USER}    ${PHASE}    ${snapshot}    
-    ${configuration}    Create Configuration    ${list}
-    ${configuration_response}    POST Configuration    ${USER}    ${PHASE}    ${configuration} 
-    ${configuration_uri_json}    Create Report URI    ${configuration_response}
-    ${report_reponse}    POST Report     ${USER}    ${PHASE}    ${configuration_uri_json} 
-    ${URI}    Get URI    ${report_reponse}
-    Log To Console    ${URI}
-    ${report}    Get Report    ${USER}    ${PHASE}    ${URI} 
-    Check Report Generation Status     ${report}
+    POST Snapshot    ${USER}    ${PHASE}    ${snapshot} 
+
+#XPP Reporting =>  Configuration
+
+#XPP Reporting =>  Report File
 
 #Clean up
