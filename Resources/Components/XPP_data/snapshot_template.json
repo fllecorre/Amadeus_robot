@@ -3,9 +3,9 @@
         "configuration": {
             "schema": {
                 "projection": "",
-                "sort": "",
-                "filter": ""
-            }
+                "sort": ""
+            },
+            "filter": ""
         },
         "timeRange": {
             "startFrom": "",

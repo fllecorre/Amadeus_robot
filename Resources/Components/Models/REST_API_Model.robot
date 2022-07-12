@@ -37,8 +37,7 @@ REST_Request
     Log Many    method = ${method}    URI =${URI}    data=${body}
     ${authorization}     REST_Create_Token    ${USER}    ${PHASE}    ${token_type}
     #Headers preparation
-    &{headers}    Create Dictionary    Authorization=${authorization}   Content-Type=application/vnd.amadeus+json    Accept=application/vnd.amadeus+json,text/html    timeout=20    maxSize=40960000
-    #&{headers}    Create Dictionary    Authorization=${authorization}   Content-Type=application/json       
+    &{headers}    Create Dictionary    Authorization=${authorization}   Content-Type=application/vnd.amadeus+json    Accept=application/vnd.amadeus+json,text/html    timeout=20    maxSize=40960000     
     Log Dictionary    ${headers}  
     # Set Headers    ${headers} 
     #Sending request 
@@ -71,8 +70,9 @@ REST_Get_Value_From_Response_byJsonPath
     [Arguments]    ${JsonPath}=None    ${response_body}=None    
     IF    ${response_body} == None
         ${response_body}    Object    response body
+        ${response_body}    Set Variable     ${response_body}[0]
     END
-    ${value}    Get Value From Json    ${response_body}[0]     ${JsonPath}
+    ${value}    Get Value From Json    ${response_body}     ${JsonPath}
     Log    ${value}[0]
     RETURN    ${value}[0]
 
@@ -87,7 +87,7 @@ REST_Create_Card
 REST_Get_Card_Info
     [Arguments]    ${USER}    ${VCN_ID}  
     ${baseURL}    Set Variable    ${REST_base_url}[${PHASE}] 
-    REST_Request    GET    ${USER}    LSS_1Aauth    ${baseURL}${REST_virtual_cards_URI}/${VCN_ID}    
+    REST_Request    GET    ${USER}    LSS_1Aauth    ${baseURL}${REST_virtual_cards_URI}/${VCN_ID}?display=ALL    
     REST_Check_Status_From_Response    200
     ${response}    REST_Get_Value_From_Response_byJsonPath      $.data
     RETURN    ${response}
