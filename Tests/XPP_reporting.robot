@@ -3,6 +3,7 @@ Resource        ../Resources/Components/Models/REST_API_Model.robot
 Resource        ../Resources/Components/Models/QA_Proxy_Model.robot
 Resource        ../Resources/Components/Models/XPP_Report_Model.robot
 
+
 *** Variables ***
 ${PHASE}    DEV
 ${USER}    ${APPUI1A01}
