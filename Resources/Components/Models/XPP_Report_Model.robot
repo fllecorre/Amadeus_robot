@@ -145,8 +145,13 @@ POST Report
 Get Report
     [Arguments]    ${USER}    ${PHASE}    ${uri}   
     ${phase_letter}    Get Phase Letter    ${PHASE}
-    ${json_response}    REST_Request    GET    ${USER}    LSS_Bearer    ${baseURL}/${uri}    
-    REST_Check_Status_From_Response    200
+    ${status}    Set Variable    ${EMPTY}     
+    WHILE  '${status}' != 'generated'    limit=5
+        ${json_response}    REST_Request    GET    ${USER}    LSS_Bearer    ${baseURL}/${uri}    
+        REST_Check_Status_From_Response    200
+        ${status}    REST_Get_Value_From_Response_byJsonPath   $.data.status
+        Log    ${status} 
+    END
     Log    ${json_response}
     RETURN    ${json_response}
 
@@ -172,11 +177,3 @@ Get URI
     ${URI}    Get Regexp Matches    ${href}   1A[A-Z]{9}${phase_letter}.*
     RETURN    ${URI}[0]
 
-Check Report Generation Status
-    [Arguments]    ${report_response}
-    ${status}    REST_Get_Value_From_Response_byJsonPath   $.data.status
-    IF    '${status}' == 'generated'    
-        Log    Report generated : ${report_response}
-    ELSE               
-        Fail    Issue in report generation : ${report_response}
-    END
