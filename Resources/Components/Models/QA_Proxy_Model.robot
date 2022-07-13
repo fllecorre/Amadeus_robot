@@ -2,10 +2,9 @@
 Library    Collections
 Library    JSONLibrary
 Library           ../../../Resources/libs/lss_token_generator.py 
-Library     deepdiff  
+Library         ../../../Resources/libs/Import_file_libs/VCN_checkimport.py  
 Resource    REST_API_Model.robot
 Variables       ../../../Resources/libs/test_users.py
-
 
 *** Variables ***
 ${qaproxy_base_url}    https://qaproxy.forge.amadeus.net/api   
@@ -18,12 +17,6 @@ Get VCN BOM
     REST_Check_Status_From_Response    200
     RETURN    ${json_response}[body]
 
-Check VCN BLOB
-    [Arguments]    ${BOM}    ${BOM_expected}
-    ${result}    Evaluate    deepdiff.DeepDiff(${BOM}, ${BOM_expected})
-    ${status}    Run Keyword And Return Status    Should Be Empty    ${result}
-    IF    ${status} == ${False}    Fail    Differences between expected and received BOM : \n ${result}
-    
 Get File Content
     [Arguments]    ${USER}    ${PHASE}    ${directory}    ${filename} 
     ${file_content}    REST_Request    GET    ${USER}    JWT     ${qaproxy_base_url}/tool/fs/catFile/${PHASE}/${l_file_provider_path}/${directory}/${filename} 
