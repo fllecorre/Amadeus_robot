@@ -1,6 +1,7 @@
 *** Settings ***
 Library    Collections
 Library    JSONLibrary
+Library    String
 Variables   ../REST_data/REST_variables.py 
 Library     ../../../Resources/libs/lss_token_generator.py
 Library     ../../../Resources/libs/jwt_generation.py
@@ -90,4 +91,19 @@ REST_Get_Card_Info
     REST_Request    GET    ${USER}    LSS_1Aauth    ${baseURL}${REST_virtual_cards_URI}/${VCN_ID}?display=ALL    
     REST_Check_Status_From_Response    200
     ${response}    REST_Get_Value_From_Response_byJsonPath      $.data
-    RETURN    ${response}
+    Log    ${response}
+    &{card_info_dict}    Create Dictionary
+    ${id}     REST_Get_Value_From_Response_byJsonPath    $.id    ${response}   
+    ${vcn_trid}    REST_Get_Value_From_Response_byJsonPath    $.history.[0].id    ${response}
+    ${currency}    REST_Get_Value_From_Response_byJsonPath    $.history.[0].amounts.[0].currencyCode   ${response}
+    ${amount}    REST_Get_Value_From_Response_byJsonPath    $.history.[0].amounts.[0].value    ${response}
+    ${vcn_ext_id}    REST_Get_Value_From_Response_byJsonPath    $.externalID    ${response}
+    ${card_number}    REST_Get_Value_From_Response_byJsonPath    $.card.cardNumber    ${response}
+    ${card_number_start}    Get Substring    ${card_number}    0    6
+    ${card_number_end}    Get Substring    ${card_number}    12    16
+    ${vendor_code}    REST_Get_Value_From_Response_byJsonPath    $.card.vendorCode    ${response}
+    ${limitation}    REST_Get_Value_From_Response_byJsonPath    $.limitations.numberOfPurchases    ${response}
+    ${provider}    REST_Get_Value_From_Response_byJsonPath    $.provider   ${response}
+    Set To Dictionary    ${card_info_dict}    vcn_id=${id}   vcn_trid=${vcn_trid}    currency=${currency}    amount=${amount}    vcn_ext_id=${vcn_ext_id}    card_number=${card_number} 
+    ...   card_number_start=${card_number_start}    card_number_end=${card_number_end}    vendor_code=${vendor_code}    limitation=${limitation}    provider=${provider}
+    RETURN    ${card_info_dict}
