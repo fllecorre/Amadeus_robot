@@ -17,6 +17,13 @@ Get VCN BOM
     REST_Check_Status_From_Response    200
     RETURN    ${json_response}[body]
 
+Check BOM
+    [Arguments]    ${USER}    ${PHASE}    ${VCN_ID}    ${expected_bom}  
+    ${actual_bom}    Get VCN_BOM    ${USER}    ${PHASE}    ${VCN_ID}   
+    ${expected_bom_json}    Convert String To JSON    ${expected_bom}
+    ${result}     VerifyCardBom    ${actual_bom}     ${expected_bom_json}    
+    IF    ${result} == 1    Fail    Mismatch detected : see VerifyCardBom keywords log to get more details 
+
 Get File Content
     [Arguments]    ${USER}    ${PHASE}    ${directory}    ${filename} 
     ${file_content}    REST_Request    GET    ${USER}    JWT     ${qaproxy_base_url}/tool/fs/catFile/${PHASE}/${l_file_provider_path}/${directory}/${filename} 

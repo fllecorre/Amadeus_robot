@@ -14,6 +14,7 @@ Generate import file content
     FOR  ${Element}    IN     @{Report_Output} 
         Log      ${Element} 
     END
+    Log    ${Report_Output}
     RETURN    ${Report_Output}
 
 Clean Import File Storage 
