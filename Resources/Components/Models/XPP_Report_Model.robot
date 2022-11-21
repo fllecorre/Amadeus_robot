@@ -214,8 +214,9 @@ Check Report Resource Content
     Should Be Equal    ${time_range_span_to}     ${current_date} 
 
 Check Report Content
-    [Arguments]    ${report_resource}     ${expected_headers}    ${expected_values_list}
-    Log Many    ${report_resource}    ${expected_headers}    ${expected_values_list}
+    [Arguments]    ${report_resource}     ${expected_headers_list}    ${expected_values_list}
+    Insert Into List   ${expected_values_list}    0    ${expected_headers_list} 
+    Log Many    ${report_resource}    ${expected_headers_list}    ${expected_values_list}
     ${report_file_location}    REST_Get_Value_From_Response_byJsonPath    $.body.data.reportFileLocation   ${report_resource} 
     Log    ${report_file_location} 
     Set SSL Verify    ${False}
@@ -228,14 +229,8 @@ Check Report Content
     Log    ${report_lines} 
     FOR    ${line}    IN RANGE    0    ${report_lines} 
         ${content}    Get Line    ${content}     ${line} 
-        IF    ${line} == 0 
-            ${expected_headers}    Evaluate    ','.join(map(str, ${expected_headers}))
-            Should Be Equal As Strings    ${content}    ${expected_headers}
-        ELSE
-            ${index}    Evaluate    int(${line}-1)
-            ${expected_content}    Evaluate    ','.join(map(str, ${expected_values_list}[${index}]))
-            Should Be Equal As Strings    ${content}    ${expected_content}  
-        END  
+        ${expected_content}    Evaluate    ','.join(map(str, ${expected_values_list}[${line}]))
+        Should Be Equal As Strings    ${content}    ${expected_content}  
     END
 
 Generate XPP Report
