@@ -1,0 +1,160 @@
+
+from jwt_generation import authenticate,getattr
+from lss_token_generator import getBearerToken,get1AAuthToken
+from VCN_checkBom import validate_json_input
+from test_users import *
+import requests
+import json
+import logging,time, random,string
+import os.path
+
+PROXY_LOGGER =logging.getLogger(__name__)
+
+qaproxy_base_url= "https://qaproxy.forge.amadeus.net/api/tool"
+
+def getRandomAlphanumeric(size):
+	return ''.join(choice(string.ascii_uppercase + string.digits) for _ in range(size))
+
+def generate_token(user,phase,token_type):
+    if token_type == "LSS_Bearer":
+        token = getBearerToken(phase,user)
+        return f"Bearer {token}"
+    elif  token_type == "JWT":
+        token =  authenticate(user[OFFICE_KEY_USER],user[WINDOWS_PWD])
+        return    getattr("token",token)
+    elif token_type == "LSS_1Aauth":
+        token = get1AAuthToken(user)
+        return f"1Aauth {token}"
+
+
+def get_vcn_bom(user,phase,card_id,id_type="VcnId"):
+    token = generate_token(user,phase,"JWT")
+    token = f"Bearer {token}"
+    headers=  {
+                'Authorization': token
+            }
+    if id_type == "VcnId":
+        url_path = f"{qaproxy_base_url}/db/getVCNBlob/{phase}/{card_id}"
+    elif id_type == "ExternalID":
+        url_path = f"{qaproxy_base_url}/db/getVCNByExtID/{phase}/{card_id}"
+    else:
+        PROXY_LOGGER.error(f"Invalid card type input {id_type}")
+        return "Invalid card type input"
+    response = requests.get(url_path,headers=headers)
+
+    if response.status_code == 200:
+        return validate_json_input(response.text)
+    else:
+        PROXY_LOGGER.error(f"response from Proxy {response.status_code}")
+        return response.status_code
+
+def Get_files_list(user,phase,provider,folder):
+    token = generate_token(user,phase,"JWT")
+    token = f"Bearer {token}"
+    headers=  {
+                'Authorization': token
+            }
+    url_path = f"{qaproxy_base_url}/fs/listDirectory/{phase}//ama/obe/{phase}/aps/vcp/data/vcp/Providers/{provider}/{folder}/"
+    response = requests.get(url_path,headers=headers)
+    if response.status_code == 200:
+        return validate_json_input(response.text)['fileList']
+    else:
+        PROXY_LOGGER.error(f" Error while retrieving file list from {url_path}!")
+        return response.status_code
+
+def Check_file_in_directory(user,phase,provider,folder,filename):
+    files_list = Get_files_list(user,phase,provider,folder)
+    if filename in files_list:
+        PROXY_LOGGER.info(f" {filename}: File exists in {folder}!")
+        return True
+    else:
+        PROXY_LOGGER.info(f" {filename}: File doesn't exist in {folder}!")
+        return False
+
+def Check_file_status(user,phase,provider,status,filename):
+    counter = 6
+    check = 0
+    if Check_file_in_directory(user,phase,provider,status,filename):
+        PROXY_LOGGER.info(f" File {filename} {status} !")
+        return True
+    else:
+        while check <= counter:
+            time.sleep(1)
+            PROXY_LOGGER.warning(f" Retry check Processed {filename}! for {check} time!")
+            result = Check_file_in_directory(user,phase,provider,status,filename)
+            check += 1
+        PROXY_LOGGER.info(f" {filename}: File doesn't exist in {status}!")
+        return result
+
+def get_file_content_by_path(user,phase,file_path):
+    url_path =f"{qaproxy_base_url}/fs/catFile/{phase}//ama/obe/{phase}{file_path}"
+    token = generate_token(user,phase,"JWT")
+    token = f"Bearer {token}"
+    headers=  {
+                'Authorization': token
+            }
+    response = requests.get(url_path,headers=headers)
+    if response.status_code == 200:
+        try:
+            response_message = json.loads(response.text)
+            output_csv = []
+            for line in response_message['fileContent']:
+                line = line.split(",")
+                output_line = [element.replace("\"","") for element in line]
+                output_csv.append(output_line)
+            return output_csv
+        except KeyError as not_readable_content:
+            PROXY_LOGGER.warning(f"Not readable file content for : {file_path} -- {not_readable_content}")
+            return response.text
+    else:
+        PROXY_LOGGER.error(f"response from Proxy {response.status_code}")
+        return response.status_code
+
+
+def add_import_file_to_folder(user,phase,provider,file,file_content,temp_folder=True):
+    if temp_folder:
+        tmp_folder_name =f"tmp/tmp.0751ZhHHNS/"
+        file_path = f"/{tmp_folder_name}/Inbox/{file}"
+    else:
+        file_path = f"/ama/obe/{phase}/aps/vcp/data/vcp/Providers/{provider}/Inbox/{file}"
+    url_path =f"{qaproxy_base_url}/fs/createFile/{phase}/{file_path}"
+    token = generate_token(user,phase,"JWT")
+    token = f"Bearer {token}"
+    headers=  {
+                'Authorization': token
+            }
+    response = requests.get(url_path,headers=headers)
+    if response.status_code == 200:
+        return add_content_to_file(user,phase,file_path,file_content).status
+    else:
+        PROXY_LOGGER.error(f" Error while adding {file} to directory {file_path}!")
+        return response.status_code
+
+
+def add_content_to_file(user,phase,filepath,file_content):
+    url_path = f"{qaproxy_base_url}/fs/addContentToFile/{phase}/{filepath}"
+    print(url_path)
+    token = generate_token(user,phase,"JWT")
+    token = f"Bearer {token}"
+    headers=  {
+                "Content-Type": "application/json",
+                "Authorization": token
+            }
+    body={ "content":file_content}
+    response = requests.post(url_path, data=json.dumps(body), headers=headers, timeout=15 )
+    if response.status_code == 200:
+        return response.status_code,response.text
+    else:
+        PROXY_LOGGER.error(f" Error while adding content to file {filepath}!")
+        return response.content
+
+if __name__ == "__main__":
+    # print(get_vcn_bom(MYUSER,"DEV","CA_6M_100.22_EUR_16729369916",id_type="ExternalID"))
+    # print(Get_files_list(MYUSER,"DEV","Ixaris","Rejected"))
+    # print(Check_file_in_directory(MYUSER,"DEV","Ixaris","Rejected","Funding_Account_Activity_20230105.160433_QA.csv"))
+
+    # print(Check_file_status(MYUSER,"DEV","Ixaris","Processed","Card_Activity_20221208.113659_QA.csv"))
+    # print(Check_file_status(MYUSER,"DEV","Ixaris","Processed","Funding_Account_Activity_20230105.160433_QA_ohqoheqoh.csv"))
+    # print(get_file_content_by_path(MYUSER,"DEV","/aps/vcp/data/vcp/Providers/Ixaris/Processed/Card_Activity_20221205.034542_QA.csv/"))Funding_Account_Activity_ixaris_20230106_180747_QA.csv
+    # print(add_import_file_to_folder(MYUSER,"DEV","Ixaris","Card_Activity_ixaris_20230106_194146_QA.csv"))
+    print(add_content_to_file(MYUSER,"DEV","/tmp/tmp.0751ZhHHNS/Inbox/Funding_Account_Activity_ixaris_20230106_180747_QA_Test.csv/","toto"))
