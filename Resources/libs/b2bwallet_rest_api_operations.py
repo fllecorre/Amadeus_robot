@@ -25,7 +25,7 @@ def get_card_list(phase,user,params):
                 "Accept":"application/vnd.amadeus+json,text/html"
                }
     response = requests.get(url,headers=headers)
-    return str(response.text)
+    return str(response.status_code)
 
 
 
