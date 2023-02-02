@@ -4,12 +4,7 @@ REST_base_url = {
     "UAT":"http://172.17.237.12:25012/1ASIUPAYU",
     "FVT":"http://172.17.237.12:25012/1ASIUPAYF",
 } 
+
 REST_virtual_cards_URI = "/payment/v1/virtualCards"
 REST_accounts_URI = "/payment/v1/business-payer/accounts"
 bodies_path = "Resources/Components/REST_data/Request_bodies" 
-
-
-
-
-
-
