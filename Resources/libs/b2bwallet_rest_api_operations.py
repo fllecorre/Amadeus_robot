@@ -53,7 +53,7 @@ def get_card_list(url, user, time_frame,status=None):
     url += '?creationBeginDate=' + time_frame + '&creationEndDate=' + next_time_frame
     if status:
         url += f"&state={status}"
-    
+
     response = requests.get(url,headers=headers)
     print(response.text)
     return response.status_code, response.json()
@@ -61,7 +61,7 @@ def get_card_list(url, user, time_frame,status=None):
 def delete_cards(url, user, ids):
     """
     Performs the DELETE /virtualCards/{vcnId} for all the ids received
-    and returns a list of tuple. 
+    and returns a list of tuple.
     Each tuple is composed by:
         - status_code of the call
         - text of the response (empty if the status_code is 200, with an error message differently)
@@ -93,7 +93,7 @@ def check_deleted_cards_status(cards_list):
         else:
             deleted_cards.append(card)
     return deleted_cards
-        
+
 
 def append(deleted_list, deleted_cards):
     for x in deleted_cards:

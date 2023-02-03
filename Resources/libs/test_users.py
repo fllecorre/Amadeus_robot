@@ -5,7 +5,6 @@ OFFICE_KEY_SIGN_CRYPTIC =  'sign_cryptic'
 OFFICE_KEY_ORGA = 'orga'
 OFFICE_KEY_USER = 'user'
 OFFICE_KEY_PWD = 'pwd'
-WINDOWS_PWD = 'pwd'
 OFFICE_KEY_SIGN_WBS =  'sign_wbs'
 
 
@@ -34,18 +33,6 @@ APPUI1A01 = {
         OFFICE_KEY_ORGA: '1A'
 
 }
-MYUSER = {
-        OFFICE_KEY_NAME: 'NCE1A09PD',
-        OFFICE_KEY_SIGN: '4863AM',
-        OFFICE_KEY_SIGN_CRYPTIC: '4863AM',
-        OFFICE_KEY_DUTY_CODE: 'SU',
-        OFFICE_KEY_SIGN_WBS: 'AMIRHZER',
-        OFFICE_KEY_USER: 'AMIRHZER',
-        OFFICE_KEY_PWD: "portal_2828",
-        WINDOWS_PWD: "portal_2828",
-        OFFICE_KEY_ORGA: '1A'
-
-}
 
 # Admin user : Role all b2b permissions, view cards for the whole metagroup
 USER_B2BW_USER2_DEV = {
@@ -55,7 +42,7 @@ USER_B2BW_USER2_DEV = {
         OFFICE_KEY_DUTY_CODE: 'SU',
         OFFICE_KEY_ORGA: '1A',
         OFFICE_KEY_USER: 'B2BW_USER2',
-        OFFICE_KEY_PWD: 'B2BW_USER2_35'
+        OFFICE_KEY_PWD: 'B2BW_USER2_37'
 }
 
 USER_B2BW_USER2_FVT = {
