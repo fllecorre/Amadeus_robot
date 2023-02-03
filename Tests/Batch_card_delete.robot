@@ -9,7 +9,7 @@ Resource    ../Resources/Components/Models/Batch_deletion_Model.robot
 
 *** Variables ***
 ${virtual_cards_path}    /payment/v1/virtualCards
-@{providers}    IXARIS
+@{providers}    IXARIS    APISO
 ${state}    CA
 
 *** Test Cases ***
