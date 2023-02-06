@@ -40,7 +40,8 @@ def get_ids_from_card_list(providers, card_list):
 def get_card_list(url, user, time_frame,status=None):
     """
     Performs the GET /virtualCards?creationBeginDate={Date&Time}&creationEndDate={Date&Time} for the given time_frame
-    and returns the status_code and the cards list as a json
+    and returns the status_code and the cards list as a json.
+    The time frame has size of 1h.
     """
     token = get1AAuthToken(user)
     headers = {
@@ -94,7 +95,6 @@ def check_deleted_cards_status(cards_list):
             deleted_cards.append(card)
     return deleted_cards
 
-
 def append(deleted_list, deleted_cards):
     for x in deleted_cards:
         deleted_list.append(x)
@@ -109,7 +109,7 @@ def interpret_report(report):
             deleted_cards +=1
         else:
             not_deleted_card.append(card)
-    deletion_rate = round((deleted_cards/(processed_cards+0.0001))*100,2)
+    deletion_rate = round((deleted_cards/(processed_cards+0.000001))*100,2)
     return f"{deletion_rate}% deleted cards, Deletion errors: {not_deleted_card}"
     
 if __name__ == "__main__":
