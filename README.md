@@ -1,1 +1,1 @@
-1. Batch delete of cards creation in direct link in PDT and UAT
+1. Batch delete of cards creation in direct link in DEV, PDT and UAT

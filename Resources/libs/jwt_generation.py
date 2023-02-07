@@ -91,9 +91,3 @@ def getattr(attr, response):
             #return self.jwt["claims"][attr]
 
         #return None
-
-
-
-
-
-    

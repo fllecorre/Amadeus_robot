@@ -7,8 +7,6 @@ OFFICE_KEY_USER = 'user'
 OFFICE_KEY_PWD = 'pwd'
 OFFICE_KEY_SIGN_WBS =  'sign_wbs'
 
-
-
 # Esky user : Role restricted view only list of cards 
 USER_ESKY= {
         OFFICE_KEY_NAME: 'FRAEY38EF',
@@ -35,6 +33,8 @@ APPUI1A01 = {
 }
 
 # Admin user : Role all b2b permissions, view cards for the whole metagroup
+Resources/libs/test_users.py
+
 USER_B2BW_USER2_DEV = {
         OFFICE_KEY_NAME: 'NCE1A0955',
         OFFICE_KEY_SIGN: '0333BB',
@@ -55,7 +55,6 @@ USER_B2BW_USER2_FVT = {
                 OFFICE_KEY_PWD: 'B2BW_USER2_234'
 }
 
-
 # Admin user : Role all b2b permissions, view cards only for his own office
 USER_B2BW_USER1 = {
         OFFICE_KEY_NAME: 'NCE1A0950',
@@ -67,7 +66,6 @@ USER_B2BW_USER1 = {
         OFFICE_KEY_PWD: 'B2BW_USER1_23'
 }
 
-
 # Admin user : Role all b2b permissions, view cards for the whole metagroup
 USER_PCIDSS3 = {
         OFFICE_KEY_NAME: 'NCE1A0950',
@@ -78,4 +76,3 @@ USER_PCIDSS3 = {
         OFFICE_KEY_USER: 'PCIDSS3',
         OFFICE_KEY_PWD: 'amadeus22'
 }
-

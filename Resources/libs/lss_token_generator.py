@@ -11,8 +11,6 @@ import requests
 import time
 import datetime
 
-
-
 def createNonceb64():
     nonce_size = 24;
     return base64.b64encode(str.encode(''.join(random.choice(string.ascii_uppercase + string.digits) for _ in range(nonce_size))))
@@ -43,7 +41,6 @@ def create1AAuthHeaderValue(orga, officeId, userId, password):
             "organization": orga }
     return base64.b64encode(str.encode(json.dumps(jwt)))
 
-
 def get1AAuthToken(user=USER_ESKY):
     #credentials = getCredentials()[phase]
     username = user[OFFICE_KEY_USER]
@@ -53,7 +50,6 @@ def get1AAuthToken(user=USER_ESKY):
     key = bytes.decode(create1AAuthHeaderValue(organization,office,username,password))
     print("1AAuth",key)
     return key
-
 
 def getLssUrl(phase):
     prefix = phase.lower()
@@ -67,7 +63,6 @@ def getCredentials():
     with open(credentials,encoding='utf-8-sig') as json_file:
         json_data = json.load(json_file)
         return json_data
-
 
 def get_POSTCheckoutform(jsonMessage, baseURL):
     
@@ -96,8 +91,6 @@ def get_POSTCheckoutform(jsonMessage, baseURL):
 
     return resp_dict
 
-
-
 def getBearerToken(phase,user=USER_ESKY):
     params = {
         "officeId": user[OFFICE_KEY_NAME],
@@ -117,7 +110,6 @@ def getBearerToken(phase,user=USER_ESKY):
     print("token:",token)
 
     return token
-
 
 def build_authlocalStorage(phase,user=USER_ESKY):
     # Build a auth local storage to use to automatically login into XPP
