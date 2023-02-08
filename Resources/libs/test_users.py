@@ -33,8 +33,6 @@ APPUI1A01 = {
 }
 
 # Admin user : Role all b2b permissions, view cards for the whole metagroup
-Resources/libs/test_users.py
-
 USER_B2BW_USER2_DEV = {
         OFFICE_KEY_NAME: 'NCE1A0955',
         OFFICE_KEY_SIGN: '0333BB',
