@@ -1,0 +1,36 @@
+{
+    "data": {
+        "type": "virtualCard",
+        "fundsTransfers": [
+            {
+                "type": "FundsTransfer",
+                "amount": {
+                    "value": "10.00",
+                    "currencyCode": "EUR"
+                }
+            }
+        ],
+        "bookingInfo": {
+            "reservationID": "D6XQ7in8",
+            "extReservationID": "TestRobotUI",
+            "traveler": [
+                {
+                    "firstName": "Jim",
+                    "lastName": "Carrey"
+                }
+            ]
+        },
+        "reportingInfo": [
+            {
+                "code": "key1_4Search",
+                "value": "val1_4Search",
+                "codeContext": "ADD"
+            },
+            {
+                "code": "key2_4Search",
+                "value": "val2_4Search",
+                "codeContext": "ADD"
+            }
+        ]
+    }
+}

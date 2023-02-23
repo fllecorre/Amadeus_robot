@@ -1,0 +1,14 @@
+{
+    "data": {
+        "type": "virtualCard",
+        "fundsTransfers": [
+            {
+                "type": "FundsTransfer",
+                "amount": {
+                    "value": "10.00",
+                    "currencyCode": "EUR"
+                }
+            }
+        ]
+    }
+}
