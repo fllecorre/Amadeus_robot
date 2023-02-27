@@ -111,8 +111,6 @@ Check AppEvents Diff
     [Arguments]    ${appEvent}    ${enriched_appEvent}     ${original_fields}    ${customer_preferred_currency} 
     ${diff}    Evaluate    deepdiff.DeepDiff(${appEvent}, ${enriched_appEvent}, ignore_order=False)
     Log     ${diff}
-    ${value}    Set Variable    [root['AmountInEUR'], root['AmountInUSD']]
-    Log    ${value} 
     ${appEvent}    Convert String To Json    ${appEvent}
     ${merchant_preferred_currency_status}    Is Preferred Currency Valid    ${customer_preferred_currency}[merchant_preferred_currency]
     ${payment_requestor_preferred_currency_status}    Is Preferred Currency Valid    ${customer_preferred_currency}[payment_requestor_preferred_currency]    
