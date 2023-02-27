@@ -3,7 +3,7 @@ Library    Collections
 Library    JSONLibrary
 Library     REST 
 Library    ../resources/lss_token_generator.py
-Variables   ../resources/B2BWallet_REST_API_conf.py    
+Variables    ../resources/B2BWallet_REST_API_conf.py
 
 
 *** Keywords ***

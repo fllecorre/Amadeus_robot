@@ -12,7 +12,7 @@ ${PHASE}    dev
 01_Kafka_Unprocessed_Topic_Test
     [Documentation]    Write and Read an event threw the unprocessed topic
     [Tags]    ready
-    ${appEvent_str}    ${VCNID}    Prepare AppEvent    ${EXECDIR}/${data_path}/appEvent.json    merchant_code=AC
+    ${appEvent_str}    ${VCNID}    Prepare AppEvent    ${CURDIR}/../${data_path}/appEvent.json    merchant_code=AC
     ${appEvents_list}        Write & Read Event     ${PHASE}    unprocessed    unprocessed    ${appEvent_str}  
     Log List     ${appEvents_list}
     Should Contain    ${appEvents_list}    ${appEvent_str}    msg=AppEvent sent not found in the unprocessed topic consumer
@@ -22,7 +22,7 @@ ${PHASE}    dev
 02_Kafka_Raw_Topic_Test
     [Documentation]    Write and Read an event threw the raw topic
     [Tags]    ready
-    ${appEvent_str}    ${VCNID}    Prepare AppEvent    ${EXECDIR}/${data_path}/appEvent.json
+    ${appEvent_str}    ${VCNID}    Prepare AppEvent    ${CURDIR}/../${data_path}/appEvent.json
     ${appEvents_list}    Write & Read Event     ${PHASE}    raw    raw    ${appEvent_str} 
     Log List     ${appEvents_list}
     Should Contain    ${appEvents_list}    ${appEvent_str}    msg=AppEvent sent not found in the raw topic consumer (VCNID=${VCNID})  
@@ -32,7 +32,7 @@ ${PHASE}    dev
 03_Kafka_Rich_Topic_Test
     [Documentation]    Write and Read an event threw the rich topic
     [Tags]    ready
-    ${appEvent_str}    ${VCNID}    Prepare AppEvent    ${EXECDIR}/${data_path}/appEvent.json
+    ${appEvent_str}    ${VCNID}    Prepare AppEvent    ${CURDIR}/../${data_path}/appEvent.json
     ${appEvents_list}    Write & Read Event     ${PHASE}    rich    rich    ${appEvent_str} 
     Log List     ${appEvents_list}
     Should Contain    ${appEvents_list}    ${appEvent_str}    msg=AppEvent sent not found in the rich topic consumer (VCNID=${VCNID}) 
@@ -42,7 +42,7 @@ ${PHASE}    dev
 04_Kafka_Unprocess_To_Rich_Topic_Test
     [Documentation]    Write an event into the unprocessed topic and read it from the rich topic
     [Tags]    ready
-    ${appEvent_str}    ${VCNID}    Prepare AppEvent    ${EXECDIR}/${data_path}/appEvent.json
+    ${appEvent_str}    ${VCNID}    Prepare AppEvent    ${CURDIR}/../${data_path}/appEvent.json
     ${appEvents_list}    Write & Read Event     ${PHASE}    unprocessed    rich    ${appEvent_str} 
     Log List     ${appEvents_list}
     ${appEvent}     Get Injected AppEvent By Id    ${appEvents_list}    ${VCNID}

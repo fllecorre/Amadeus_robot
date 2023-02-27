@@ -242,7 +242,7 @@ Get Customer Preferred Currency
     ...    Return value :
     ...    - preferred_currency : dict containing merchant and payment requestor preferred currencies
     [Arguments]    &{original_fields}
-    @{customer_preferred_currency_list}    Read Csv File To Associative        ${data_path}/preferred_currency_per_customer.csv
+    @{customer_preferred_currency_list}    Read Csv File To Associative        ${CURDIR}/../${data_path}/preferred_currency_per_customer.csv
     Log    ${customer_preferred_currency_list}
     ${is_merchant_code_present}    Run Keyword And Return Status    Get From Dictionary    ${original_fields}    merchant_code    
     ${is_payment_requestor_present}    Run Keyword And Return Status    Get From Dictionary    ${original_fields}    payment_requestor    

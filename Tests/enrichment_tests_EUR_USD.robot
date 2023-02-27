@@ -12,7 +12,7 @@ ${PHASE}    dev
 01_Enrichment_Test_With_Fake_AppEvent_EUR
     [Tags]     ready
     [Documentation]    Write an event into the unprocessed topic and check the enriched appEvent from the rich topic
-    ${appEvent}    ${PRI}    Prepare AppEvent    ${EXECDIR}/${data_path}/appEvent.json    amount_str=100    currency=EUR
+    ${appEvent}    ${PRI}    Prepare AppEvent    ${CURDIR}/../${data_path}/appEvent.json    amount_str=100    currency=EUR
     ${appEvents_list}    Write & Read Event     ${PHASE}    unprocessed    rich    ${appEvent} 
     Log List     ${appEvents_list}
     ${enriched_appEvent}     Get Injected AppEvent By Id    ${appEvents_list}    ${PRI}
@@ -23,7 +23,7 @@ ${PHASE}    dev
 02_Enrichment_Test_With_Fake_AppEvent_USD
     [Tags]     ready
     [Documentation]    Write an event into the unprocessed topic and check the enriched appEvent from the rich topic
-    ${appEvent}    ${PRI}    Prepare AppEvent    ${EXECDIR}/${data_path}/appEvent.json    amount_str=100    currency=USD
+    ${appEvent}    ${PRI}    Prepare AppEvent    ${CURDIR}/../${data_path}/appEvent.json    amount_str=100    currency=USD
     ${appEvents_list}    Write & Read Event     ${PHASE}    unprocessed    rich    ${appEvent} 
     Log List     ${appEvents_list}
     ${enriched_appEvent}     Get Injected AppEvent By Id    ${appEvents_list}    ${PRI}
@@ -34,7 +34,7 @@ ${PHASE}    dev
 03_Enrichment_Test_With_Fake_AppEvent_CAD
     [Tags]     ready
     [Documentation]    Write an event into the unprocessed topic and check the enriched appEvent from the rich topic
-    ${appEvent}    ${PRI}    Prepare AppEvent    ${EXECDIR}/${data_path}/appEvent.json    amount_str=100    currency=CAD
+    ${appEvent}    ${PRI}    Prepare AppEvent    ${CURDIR}/../${data_path}/appEvent.json    amount_str=100    currency=CAD
     ${appEvents_list}    Write & Read Event     ${PHASE}    unprocessed    rich    ${appEvent} 
     Log List     ${appEvents_list}
     ${enriched_appEvent}     Get Injected AppEvent By Id    ${appEvents_list}    ${PRI}
