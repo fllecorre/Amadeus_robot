@@ -5,7 +5,7 @@ Library    String
 Library    REST
 Library    OperatingSystem
 Library    DateTime
-Variables   ../resources/Databricks_API_conf.py
+Variables   ../Resources/Databricks_API_conf.py
 Resource    REST_API_Model.robot
 
 *** Keywords ***

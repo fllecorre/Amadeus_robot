@@ -4,7 +4,7 @@ Library    Collections
 Library    ConfluentKafkaLibrary
 Library    JSONLibrary
 Resource    Kafka_Model.robot
-Variables   ../resources/kafka_conf.py
+Variables   ../Resources/kafka_conf.py
 
 *** Keywords ***
 Configure Consumer
