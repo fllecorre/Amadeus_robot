@@ -1,0 +1,12 @@
+datasources:9549b2e5bfaaf7e82a96deaecf57c22e52a9f1f4
+commandlineoptions:65f95c924ba97541f47949701c4e3c51192a5b43
+suitesfrom:no-suites-from-option
+file:dcc18d814083e77e2364f86da190324c21f211e1
+--test Kafka Topics Tests.01_Kafka_Unprocessed_Topic_Test
+--test Kafka Topics Tests.02_Kafka_Raw_Topic_Test
+--test Kafka Topics Tests.03_Kafka_Rich_Topic_Test
+--test Kafka Topics Tests.04_Kafka_Unprocess_To_Rich_Topic_Test
+--test Kafka Topics Tests.05_Kafka_VCN_Creation_To_Unprocessed_Topic_Test
+--test Kafka Topics Tests.06_Kafka_VCN_Creation_To_Raw_Topic_Test
+--test Kafka Topics Tests.07_Kafka_VCN_Creation_To_Rich_Topic_Test
+--test Kafka Topics Tests.08_Kafka_Recovery_Topic_Test

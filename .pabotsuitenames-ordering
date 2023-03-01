@@ -1,0 +1,7 @@
+datasources:acb202695c10e5e3125c39e87deb79f5d3ff0636
+commandlineoptions:c02267d2c75e4dd883827afdc6d39083b4eb2531
+suitesfrom:no-suites-from-option
+file:9cb95ae718ac03244fe2e41a5f5d3b455bf1c6bc
+--suite Tests.Suite2
+--test Tests.Suite1.TC2 REST Create And Delete A Card
+--test Tests.Suite1.TC1 REST Create A Cardd
