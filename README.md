@@ -27,13 +27,13 @@
 ### *How to run the tests in parallel*
 
 - Run tests cases in parallel : 
-    - > `pabot --outputdir results --variable PHASE:dev --testlevelsplit tests/suite1.robot`
+    - > `pabot --testlevelsplit --outputdir results --variable PHASE:dev tests/suite1.robot`
 
 - Run tests suites in parallel :  :  
     - > `pabot --outputdir results --variable PHASE:dev tests`
 
 - Run test suites and test cases in parallel : 
-    - > `pabot --outputdir results --variable PHASE:dev --testlevelsplit tests`
+    - > `pabot --testlevelsplit --outputdir results --variable PHASE:dev  tests`
 
 - Run test cases in 2 parallel executors :
     - > `pabot --processes 2 --testlevelsplit --outputdir results --variable PHASE:dev tests`
