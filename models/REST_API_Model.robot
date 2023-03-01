@@ -2,8 +2,8 @@
 Library    Collections
 Library    JSONLibrary
 Library     REST
-Library    ../Resources/lss_token_generator.py
-Variables    ../Resources/B2BWallet_REST_API_conf.py
+Library    ../resources/lss_token_generator.py
+Variables    ../resources/B2BWallet_REST_API_conf.py
 
 *** Keywords ***
 REST_Create_Token

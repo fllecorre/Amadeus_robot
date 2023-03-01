@@ -3,7 +3,7 @@ Resource    ../models/REST_API_Model.robot
 Resource    ../models/Kafka_Model.robot
 Resource    ../models/AppEvent_Model.robot
 Resource    ../models/Databricks_Model.robot
-Variables   ../Resources/test_users.py
+Variables   ../resources/test_users.py
 
 *** Variables ***
 ${PHASE}    dev
