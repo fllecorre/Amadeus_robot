@@ -6,7 +6,7 @@ Library           Collections
 Library           DebugLibrary
 Library           DateTime
 Library           CSVLibrary
-Library           ../../../Resources/libs/lss_token_generator.py  
+Library           ../../../resources/libs/lss_token_generator.py  
 Resource          B2bWalletUI_REST_API_Model.robot
 
 

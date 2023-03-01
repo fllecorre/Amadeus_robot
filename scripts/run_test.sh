@@ -1,2 +1,2 @@
-robot -x result.xml -o report.xml Tests/Batch_card_delete.robot
+pabot -x result.xml -o report.xml --variable PHASE:dev --testlevelsplit tests
 
