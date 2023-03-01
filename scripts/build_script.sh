@@ -18,6 +18,7 @@ pip3 install RESTinstance==1.3.0
 pip3 install robotframework-jsonlibrary==0.5
 pip3 install robotframework-csvlibrary==0.0.5
 pip3 install deepdiff==5.8.1
+pip3 install robotframework-pabot==2.13.0
 
 export PYTHONPATH="${PYTHONPATH}:/usr/local/lib/python3.9"
 export PYTHONPATH="${PYTHONPATH}:/usr/local/lib/python3.9/site-packages"
