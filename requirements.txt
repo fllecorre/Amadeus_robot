@@ -1,0 +1,6 @@
+robotframework==5.0
+robotframework-pabot==2.13.0
+robotframework-csvlibrary==0.0.5
+robotframework-debuglibrary==2.3.0
+robotframework-jsonlibrary==0.5
+RESTinstance==1.3.0
