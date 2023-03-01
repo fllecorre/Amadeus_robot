@@ -111,8 +111,6 @@ Check AppEvents Diff
     [Arguments]    ${appEvent}    ${enriched_appEvent}     ${original_fields}    ${customer_preferred_currency} 
     ${diff}    Evaluate    deepdiff.DeepDiff(${appEvent}, ${enriched_appEvent}, ignore_order=False)
     Log     ${diff}
-    ${value}    Set Variable    [root['AmountInEUR'], root['AmountInUSD']]
-    Log    ${value} 
     ${appEvent}    Convert String To Json    ${appEvent}
     ${merchant_preferred_currency_status}    Is Preferred Currency Valid    ${customer_preferred_currency}[merchant_preferred_currency]
     ${payment_requestor_preferred_currency_status}    Is Preferred Currency Valid    ${customer_preferred_currency}[payment_requestor_preferred_currency]    
@@ -244,7 +242,7 @@ Get Customer Preferred Currency
     ...    Return value :
     ...    - preferred_currency : dict containing merchant and payment requestor preferred currencies
     [Arguments]    &{original_fields}
-    @{customer_preferred_currency_list}    Read Csv File To Associative        ${data_path}/preferred_currency_per_customer.csv
+    @{customer_preferred_currency_list}    Read Csv File To Associative        ${CURDIR}/../${data_path}/preferred_currency_per_customer.csv
     Log    ${customer_preferred_currency_list}
     ${is_merchant_code_present}    Run Keyword And Return Status    Get From Dictionary    ${original_fields}    merchant_code    
     ${is_payment_requestor_present}    Run Keyword And Return Status    Get From Dictionary    ${original_fields}    payment_requestor    

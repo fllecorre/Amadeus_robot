@@ -12,7 +12,7 @@ ${PHASE}    dev
 01_Enrichment_Test_With_MerchantCode
     [Tags]     ready
     [Documentation]    Write an event into the unprocessed topic and check the enriched appEvent from the rich topic
-    ${appEvent}    ${PRI}    Prepare AppEvent    ${EXECDIR}/${data_path}/appEvent.json    amount_str=100    currency=AUD    merchant_code=AC
+    ${appEvent}    ${PRI}    Prepare AppEvent    ${CURDIR}/../${data_path}/appEvent.json    amount_str=100    currency=AUD    merchant_code=AC
     ${appEvents_list}    Write & Read Event     ${PHASE}    unprocessed    rich    ${appEvent} 
     Log List     ${appEvents_list}
     ${enriched_appEvent}     Get Injected AppEvent By Id    ${appEvents_list}    ${PRI}
@@ -23,7 +23,7 @@ ${PHASE}    dev
 02_Enrichment_Test_With_PaymentRequestor
     [Tags]     ready
     [Documentation]    Write an event into the unprocessed topic and check the enriched appEvent from the rich topic
-    ${appEvent}    ${PRI}    Prepare AppEvent    ${EXECDIR}/${data_path}/appEvent.json    amount_str=100    currency=AUD    payment_requestor=AC
+    ${appEvent}    ${PRI}    Prepare AppEvent    ${CURDIR}/../${data_path}/appEvent.json    amount_str=100    currency=AUD    payment_requestor=AC
     ${appEvents_list}    Write & Read Event     ${PHASE}    unprocessed    rich    ${appEvent} 
     Log List     ${appEvents_list}
     ${enriched_appEvent}     Get Injected AppEvent By Id    ${appEvents_list}    ${PRI}
@@ -34,7 +34,7 @@ ${PHASE}    dev
 03_Enrichment_Test_With_MerchantCode_and_PaymentRequestor
     [Tags]     ready
     [Documentation]    Write an event into the unprocessed topic and check the enriched appEvent from the rich topic
-    ${appEvent}    ${PRI}    Prepare AppEvent    ${EXECDIR}/${data_path}/appEvent.json    amount_str=100    currency=AUD    merchant_code=AC    payment_requestor=AH
+    ${appEvent}    ${PRI}    Prepare AppEvent    ${CURDIR}/../${data_path}/appEvent.json    amount_str=100    currency=AUD    merchant_code=AC    payment_requestor=AH
     ${appEvents_list}    Write & Read Event     ${PHASE}    unprocessed    rich    ${appEvent} 
     Log List     ${appEvents_list}
     ${enriched_appEvent}     Get Injected AppEvent By Id    ${appEvents_list}    ${PRI}
@@ -45,7 +45,7 @@ ${PHASE}    dev
 04_Enrichment_Test_Without_MerchantCode_nor_PaymentRequestor
     [Tags]     ready
     [Documentation]    Write an event into the unprocessed topic and check the enriched appEvent from the rich topic
-    ${appEvent}    ${PRI}    Prepare AppEvent    ${EXECDIR}/${data_path}/appEvent.json    amount_str=100    currency=AUD
+    ${appEvent}    ${PRI}    Prepare AppEvent    ${CURDIR}/../${data_path}/appEvent.json    amount_str=100    currency=AUD
     ${appEvents_list}    Write & Read Event     ${PHASE}    unprocessed    rich    ${appEvent} 
     Log List     ${appEvents_list}
     ${enriched_appEvent}     Get Injected AppEvent By Id    ${appEvents_list}    ${PRI}
@@ -56,7 +56,7 @@ ${PHASE}    dev
 05_Enrichment_Test_Without_Preferred_Currency
     [Tags]     ready
     [Documentation]    Write an event into the unprocessed topic and check the enriched appEvent from the rich topic
-    ${appEvent}    ${PRI}    Prepare AppEvent    ${EXECDIR}/${data_path}/appEvent.json    amount_str=100    currency=AUD    merchant_code=AF    payment_requestor=AF
+    ${appEvent}    ${PRI}    Prepare AppEvent    ${CURDIR}/../${data_path}/appEvent.json    amount_str=100    currency=AUD    merchant_code=AF    payment_requestor=AF
     ${appEvents_list}    Write & Read Event     ${PHASE}    unprocessed    rich    ${appEvent} 
     Log List     ${appEvents_list}
     ${enriched_appEvent}     Get Injected AppEvent By Id    ${appEvents_list}    ${PRI}
@@ -78,7 +78,7 @@ ${PHASE}    dev
 07_Enrichment_Test_With_Lower_Case_Preferred_Currency
     [Tags]     ready
     [Documentation]    Write an event into the unprocessed topic and check the enriched appEvent from the rich topic
-    ${appEvent}    ${PRI}    Prepare AppEvent    ${EXECDIR}/${data_path}/appEvent.json    amount_str=100    currency=AUD    merchant_code=TEST_CURRENCY_CODE_LOWER_CASE    payment_requestor=TEST_CURRENCY_CODE_LOWER_CASE
+    ${appEvent}    ${PRI}    Prepare AppEvent    ${CURDIR}/../${data_path}/appEvent.json    amount_str=100    currency=AUD    merchant_code=TEST_CURRENCY_CODE_LOWER_CASE    payment_requestor=TEST_CURRENCY_CODE_LOWER_CASE
     ${appEvents_list}    Write & Read Event     ${PHASE}    unprocessed    rich    ${appEvent} 
     Log List     ${appEvents_list}
     ${enriched_appEvent}     Get Injected AppEvent By Id    ${appEvents_list}    ${PRI}
@@ -89,7 +89,7 @@ ${PHASE}    dev
 08_Enrichment_Test_With_Space_As_Preferred_Currency
     [Tags]     ready
     [Documentation]    Write an event into the unprocessed topic and check the enriched appEvent from the rich topic
-    ${appEvent}    ${PRI}    Prepare AppEvent    ${EXECDIR}/${data_path}/appEvent.json    amount_str=100    currency=AUD    merchant_code=TEST_CURRENCY_CODE_SPACE    payment_requestor=TEST_CURRENCY_CODE_SPACE
+    ${appEvent}    ${PRI}    Prepare AppEvent    ${CURDIR}/../${data_path}/appEvent.json    amount_str=100    currency=AUD    merchant_code=TEST_CURRENCY_CODE_SPACE    payment_requestor=TEST_CURRENCY_CODE_SPACE
     ${appEvents_list}    Write & Read Event     ${PHASE}    unprocessed    rich    ${appEvent} 
     Log List     ${appEvents_list}
     ${enriched_appEvent}     Get Injected AppEvent By Id    ${appEvents_list}    ${PRI}
@@ -100,7 +100,7 @@ ${PHASE}    dev
 09_Enrichment_Test_With_Two_Different_Preferred_Currencies
     [Tags]     ready
     [Documentation]    Write an event into the unprocessed topic and check the enriched appEvent from the rich topic
-    ${appEvent}    ${PRI}    Prepare AppEvent    ${EXECDIR}/${data_path}/appEvent.json    amount_str=100    currency=AUD    merchant_code=TEST_CUSTOMER_CODE_DUPLICATED    payment_requestor=TEST_CUSTOMER_CODE_DUPLICATED
+    ${appEvent}    ${PRI}    Prepare AppEvent    ${CURDIR}/../${data_path}/appEvent.json    amount_str=100    currency=AUD    merchant_code=TEST_CUSTOMER_CODE_DUPLICATED    payment_requestor=TEST_CUSTOMER_CODE_DUPLICATED
     ${appEvents_list}    Write & Read Event     ${PHASE}    unprocessed    rich    ${appEvent} 
     Log List     ${appEvents_list}
     ${enriched_appEvent}     Get Injected AppEvent By Id    ${appEvents_list}    ${PRI}

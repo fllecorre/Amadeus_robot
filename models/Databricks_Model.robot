@@ -39,7 +39,7 @@ Get Run Output
     &{headers}    Create Dictionary    Authorization=Bearer ${token}   Accept=application/json
     &{body}    Create Dictionary    run_id=${run_id} 
     ${run_status}    Set Variable    PENDING
-    WHILE    '${run_status}' != 'TERMINATED'    limit=5
+    WHILE    '${run_status}' != 'TERMINATED'    limit=10
         Log To Console     Waiting for the job run to finish
         ${response}    GET   ${databricks_url}/${databricks_api_endpoints}[get_output]   query=&{body}    headers=&{headers}  
         Log     ${response}
@@ -121,7 +121,7 @@ Get Exchange Rates From Local
     ...    - rate_dict : dictionary containing the exchange rates in EUR, USD and in the preferred currencies 
     [Arguments]    ${date}    ${original_currency}    ${preferred_currencies}=${EMPTY}  
     Log Many    ${date}    ${original_currency}       
-    ${grep_line}    Grep File    ${EXECDIR}/${data_path}/exchange_rates.txt    ${date} : ${original_currency} :
+    ${grep_line}    Grep File    ${CURDIR}/../${data_path}/exchange_rates.txt    ${date} : ${original_currency} :
     ${date}    ${original_currency}    ${rates}    Split String    ${grep_line}    ${SPACE}:${SPACE}    2  
     ${rate_EUR}    Search For A Specific Exchange Rate    ${rates}    ${original_currency}    EUR
     ${rate_USD}    Search For A Specific Exchange Rate    ${rates}    ${original_currency}    USD 
@@ -139,7 +139,7 @@ Get Exchange Rates From Local
 Is Daily Exchange Rate Already Available
     [Documentation]
     [Arguments]    ${original_currency}    ${date}
-    ${grep_line}    Grep File    ${EXECDIR}/${data_path}/exchange_rates.txt    ${date} : ${original_currency} :
+    ${grep_line}    Grep File    ${CURDIR}/../${data_path}/exchange_rates.txt    ${date} : ${original_currency} :
     IF    '${grep_line}' == '${EMPTY}'    RETURN      ${False}    ELSE     RETURN    ${True}
     
 Search For A Specific Exchange Rate

@@ -7,4 +7,4 @@ REST_base_url = {
 
 REST_virtual_cards_URI = 'payment/v1/virtualCards'
 
-data_path = 'RobotFramework/data'
+data_path = '/data/'
