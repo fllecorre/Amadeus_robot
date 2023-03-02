@@ -1,9 +1,11 @@
 *** Settings ***
+Library    pabot.PabotLib
 Resource    ../models/REST_API_Model.robot
 Resource    ../models/Kafka_Model.robot
 Resource    ../models/AppEvent_Model.robot
 Resource    ../models/Databricks_Model.robot
 Variables   ../resources/test_users.py
+Suite Setup   Run Setup Only Once    Get Exchange Rates SetUp    EUR    USD     CAD     AUD
 
 *** Variables ***
 ${PHASE}    dev
@@ -17,7 +19,7 @@ ${PHASE}    dev
     Log List     ${appEvents_list}
     ${enriched_appEvent}     Get Injected AppEvent By Id    ${appEvents_list}    ${PRI}
     Should Not Be Empty    ${enriched_appEvent}     msg=AppEvent sent not found in the rich topic consumer (PRI=${PRI})
-    Check Enriched AppEvent    ${appEvent}    ${enriched_appEvent}    
+    Check Enriched AppEvent    ${appEvent}    ${enriched_appEvent}   
     [Teardown]    Basic Teardown  ${consumer_group_id}
 
 02_Enrichment_Test_With_Fake_AppEvent_USD

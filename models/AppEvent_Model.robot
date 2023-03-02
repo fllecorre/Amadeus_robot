@@ -204,7 +204,7 @@ Check Conversion
     ...    - new_fields : dictionary containing  new fields and values from the enriched appEvent
     ...    - customer_preferred_currency : dict containing merchant and payment requestor preferred currencies
     [Arguments]    ${original_fields}    ${new_fields}    ${customer_preferred_currency} 
-    &{exchange_rates_dict}    Get Exchange Rates    ${original_fields}[currency]     ${customer_preferred_currency}   
+    &{exchange_rates_dict}    Get Exchange Rates From Local    ${original_fields}[currency]     ${customer_preferred_currency}   
     ${merchant_preferred_currency}    Set Variable    ${customer_preferred_currency}[merchant_preferred_currency]
     ${payment_requestor_preferred_currency}    Set Variable    ${customer_preferred_currency}[payment_requestor_preferred_currency]
     #AmountInUSD

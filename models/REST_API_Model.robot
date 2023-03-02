@@ -85,7 +85,7 @@ REST_Create_Card
     ...    Return value :
     ...    - vcn_id : id of the created card
     [Arguments]    ${phase}    ${USER}    ${json_filename}    ${setup}=${False}     
-    REST_Request    ${phase}    POST    ${USER}    ${REST_virtual_cards_URI}    ${EXECDIR}/${data_path}/${json_filename} 
+    REST_Request    ${phase}    POST    ${USER}    ${REST_virtual_cards_URI}    ${CURDIR}/../${data_path}/${json_filename} 
     REST_Check_Status_From_Response    201
     ${vcn_id}    REST_Get_Value_From_Response_byJsonPath      data.id
     IF  ${setup} == ${True}    Set Test Variable    ${vcn_id}    ELSE    RETURN    ${vcn_id}
@@ -98,7 +98,7 @@ REST_Update_Card
     ...    - VCN_ID : id of the card to update
     ...    - json_filename : json file containing data for the card update
     [Arguments]    ${phase}    ${USER}    ${VCN_ID}     ${json_filename}     
-    REST_Request    ${phase}    PATCH    ${USER}    ${REST_virtual_cards_URI}/${VCN_ID}    ${EXECDIR}/${data_path}/${json_filename} 
+    REST_Request    ${phase}    PATCH    ${USER}    ${REST_virtual_cards_URI}/${VCN_ID}    ${CURDIR}/../${data_path}/${json_filename} 
     REST_Check_Status_From_Response    200 
 
 
