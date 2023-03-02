@@ -8,6 +8,7 @@ Library    DateTime
 Variables   ../resources/Databricks_API_conf.py
 Resource    REST_API_Model.robot
 
+
 *** Keywords ***
 Run Job With Parameter  
     [Documentation]    Run databricks job to retrieve the exchange rates of a specific currency
@@ -26,7 +27,7 @@ Run Job With Parameter
     ${run_id}    IF    '${job_status}' == '${True}'    Get_Value_From_Response_byJsonPath    $.body.run_id    ${response}    ELSE    Fail    msg=Databricks job failed (job_id = ${job_id})
     Log     ${run_id}
     Log To Console     Job started, run in progress...
-    Sleep    60s     Job started, run in progress...
+    Sleep    90s     Job started, run in progress...
     RETURN     ${run_id} 
 
 Get Run Output
@@ -73,59 +74,53 @@ Format Run Output
     Log List    ${formatted_output_list}
     RETURN    ${formatted_output_list}
 
-Get Exchange Rates
-    [Arguments]    ${original_currency}    ${preferred_currencies}=${EMPTY}
-    ${date}    Get Current Date    result_format=%Y-%m-%d
-    ${status}    Is Daily Exchange Rate Already Available    ${original_currency}    ${date}
-    IF    ${status} == ${True}
-        &{rate_dict}    Get Exchange Rates From Local    ${date}    ${original_currency}    ${preferred_currencies}     
-    ELSE
-        &{rate_dict}    Get Exchange Rates From Databricks    ${original_currency}    ${preferred_currencies} 
-    END
-    RETURN    &{rate_dict} 
-
-Get Exchange Rates From Databricks
+Get Exchange Rates SetUp
     [Documentation]    Get the exchange rates in EUR, USD and in the preferred currencies of a currency. 
     ...    The rates are retrieved by running a dedicated Databricks job and stored in a local file
     ...    Parameters :
-    ...    - original_currency : currency to convert
-    ...    - preferred_currencies : dict containing merchant and payment requestor preferred currencies
+    ...    - original_currency : list of currencies 
     ...    Return value :
-    ...    - rate_dict : dictionary containing the exchange rates in EUR, USD and in the preferred currencies  
-    [Arguments]    ${original_currency}    ${preferred_currencies}=${EMPTY}
-    ${run_id}    Run Job With Parameter    ${exchange_rates_job_id}    ${original_currency} 
-    ${output}    Get Run Output    ${run_id}
-    Log    ${output} 
-    ${rate_EUR}    Search For A Specific Exchange Rate    ${output}    ${original_currency}    EUR
-    ${rate_USD}    Search For A Specific Exchange Rate    ${output}    ${original_currency}    USD 
-    &{rate_dict}    Create Dictionary    rate_${original_currency}_EUR=${rate_EUR}    rate_${original_currency}_USD=${rate_USD}
-    IF    &{preferred_currencies} != &{EMPTY}
-        FOR     ${preferred_currency_type}    ${preferred_currency}    IN    &{preferred_currencies}
-            ${rate_preferred_currency}    Search For A Specific Exchange Rate    ${output}    ${original_currency}    ${preferred_currency} 
-            Set To Dictionary   ${rate_dict}    rate_${original_currency}_${preferred_currency}=${rate_preferred_currency}
+    ...    - rate_dict : dictionary containing the exchange rates in EUR, USD and in the preferred currencies 
+    [Arguments]    @{original_currencies}   
+    FOR    ${currency}    IN    @{original_currencies}
+        Log    ${currency}
+        ${date}    Get Current Date    result_format=%Y-%m-%d
+        ${status}    Is Daily Exchange Rate Already Available    ${currency}    ${date}
+        IF    ${status} == ${False}
+            Get Exchange Rates From Databricks    ${currency}  
         END
     END
-    Log Dictionary      ${rate_dict} 
+    
+
+Get Exchange Rates From Databricks
+    [Documentation]    Get the latest exchange rates of a currency and store it in a local data file
+    ...    The rates are retrieved by running a dedicated Databricks job and stored in a local file
+    ...    Parameters :
+    ...    - original_currency : currency to convert
+    [Arguments]    ${original_currency}    
+    Log    ${original_currency}
+    ${run_id}    Run Job With Parameter    ${exchange_rates_job_id}    ${original_currency} 
+    ${output}    Get Run Output    ${run_id}
+    Log    ${output} } 
     ${current_date}    Get Current Date    result_format=%Y-%m-%d
-    Append To File    ${EXECDIR}/${data_path}/exchange_rates.txt    ${\n}${current_date} : ${original_currency} : ${output}
-    Get Exchange Rate Date    ${output}
-    RETURN    &{rate_dict}
+    Append To File    ${CURDIR}/../${data_path}/exchange_rates.txt    ${\n}${current_date} : ${original_currency} : ${output}
+    Log Exchange Rate Date    ${output}
 
 Get Exchange Rates From Local
-    [Documentation]    Get the exchange rates in EUR, USD and in the preferred currencies of a currency. 
-    ...    The rates are retrieved from a local file
+    [Documentation]    Get from local data file the exchange rates in EUR, USD and in the preferred currencies of a currency. 
     ...    Parameters :
     ...    - original_currency : currency to convert
     ...    - preferred_currencies : dict containing merchant and payment requestor preferred currencies
     ...    Return value :
     ...    - rate_dict : dictionary containing the exchange rates in EUR, USD and in the preferred currencies 
-    [Arguments]    ${date}    ${original_currency}    ${preferred_currencies}=${EMPTY}  
+    [Arguments]    ${original_currency}    ${preferred_currencies}=${EMPTY}  
+    ${date}    Get Current Date    result_format=%Y-%m-%d
     Log Many    ${date}    ${original_currency}       
     ${grep_line}    Grep File    ${CURDIR}/../${data_path}/exchange_rates.txt    ${date} : ${original_currency} :
     ${date}    ${original_currency}    ${rates}    Split String    ${grep_line}    ${SPACE}:${SPACE}    2  
     ${rate_EUR}    Search For A Specific Exchange Rate    ${rates}    ${original_currency}    EUR
     ${rate_USD}    Search For A Specific Exchange Rate    ${rates}    ${original_currency}    USD 
-    &{rate_dict}    Create Dictionary    rate_${original_currency}_EUR=${rate_EUR}    rate_${original_currency}_USD=${rate_USD}
+    &{rate_dict}    Create Dictionary    rate_${original_currency}_EUR=${rate_EUR}    rate_${original_currency}_USD=${rate_USD}    
     IF    &{preferred_currencies} != &{EMPTY}
         FOR     ${preferred_currency_type}    ${preferred_currency}    IN    &{preferred_currencies}
             ${rate_preferred_currency}    Search For A Specific Exchange Rate    ${rates}    ${original_currency}    ${preferred_currency} 
@@ -145,7 +140,7 @@ Is Daily Exchange Rate Already Available
 Search For A Specific Exchange Rate
     [Documentation]    Get the exchange rate of a currency
     ...    Parameters :
-    ...    - exchange_rates_output : raw result from the databrick job run
+    ...    - exchange_rates_output : raw result from the databrick job run (stored in a local data file)
     ...    - original_currency : currency to convert
     ...    - selling_currency : output currency
     ...    Return value :
@@ -184,7 +179,7 @@ Get_Value_From_Response_byJsonPath
     Log    ${value}[0]
     RETURN    ${value}[0]
 
-Get Exchange Rate Date
+Log Exchange Rate Date
     [Documentation]     Retrieve a value from the json response body
     ...    Parameters :
     ...    - json_path : jsonPath to get value from (example $.data.card.cardNumber)
@@ -197,7 +192,9 @@ Get Exchange Rate Date
     ${current_exchange_rate_date}    Convert Date    ${current_exchange_rate_date}    date_format=%d/%m/%Y    result_format=%Y-%m-%d 
     ${gap}    Subtract Date From Date    ${current_date}    ${current_exchange_rate_date}    exclude_millis=${True}
     ${gap}    Evaluate    int(${gap}/3600/24)
-    IF    0<${gap}<=10
+    IF   ${gap}==0
+        Log    Exchange rates received are up to date (${current_exchange_rate_date})    level=TRACE    console=${True}
+    ELSE IF    0<${gap}<=10 
         Log    Exchange rates received are not up to date (${current_exchange_rate_date})    level=WARN    console=${True}
     ELSE IF    ${gap}>10  
         Log    Exchange rates received are more than 10 days old. The enrichment will not be performed    level=ERROR    console=${True}

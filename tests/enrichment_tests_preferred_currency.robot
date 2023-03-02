@@ -1,9 +1,11 @@
 *** Settings ***
+Library    pabot.PabotLib
 Resource    ../models/REST_API_Model.robot
 Resource    ../models/Kafka_Model.robot
 Resource    ../models/AppEvent_Model.robot
 Resource    ../models/Databricks_Model.robot
 Variables   ../resources/test_users.py
+Suite Setup   Run Setup Only Once    Get Exchange Rates SetUp    EUR    USD     CAD     AUD
 
 *** Variables ***
 ${PHASE}    dev
