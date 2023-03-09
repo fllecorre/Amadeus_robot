@@ -87,7 +87,9 @@ Get Exchange Rates SetUp
         ${date}    Get Current Date    result_format=%Y-%m-%d
         ${status}    Is Daily Exchange Rate Already Available    ${currency}    ${date}
         IF    ${status} == ${False}
-            Get Exchange Rates From Databricks    ${currency}  
+            Acquire Lock    databricks_job
+            Get Exchange Rates From Databricks    ${currency} 
+            Release Lock    databricks_job
         END
     END
     
