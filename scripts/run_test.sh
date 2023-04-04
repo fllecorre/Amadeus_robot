@@ -1,2 +1,2 @@
-robot -x result.xml -o report.xml Tests/Batch_card_delete.robot
+robot -x result.xml -o report.xml tests/cyberark_tests.robot
 
