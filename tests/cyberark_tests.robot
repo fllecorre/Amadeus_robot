@@ -5,11 +5,12 @@ Library        ../resources/libs/qaproxy.py
 
 *** Variables ***
 ${PHASE}    DEV
-${cert_filepath}    C:/Users/flecorre/Downloads/CyberArk/payment.amadeus.net.crt
-${key_filepath}    C:/Users/flecorre/Downloads/CyberArk/new.payment.amadeus.net.key
+${cert_filepath}
+${key_filepath}
 
 *** Test Cases ***
 Get Password From Cyberark With OS User Authentication
+    [Tags]    windows
     ${password}    Get Password And Conceal   safe=APS-B2B-D    appID_OS=APS-B2B-OS-D    cyb_object=WIN_account
     Log      ${password}
     ${bom}    Get Vcn Bom    flecorre    ${password}    ${PHASE}    2222JNV3
