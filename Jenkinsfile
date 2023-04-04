@@ -23,7 +23,7 @@ node {
           withCredentials([
                     file(credentialsId: 'PAY_CYBERARK_CERTIFICATE', variable: 'CERT'),
                     file(credentialsId: 'PAY_CYBERARK_KEY', variable: 'CKEY')]){
-                      sh "a2ewhale -v dir pom.xml -p maven_cmd:\"clean antrun:run@launch_QCP_tests\""
+                      sh "a2ewhale -v dir pom.xml -p maven_cmd:\"clean antrun:run@launch_tests\""
                     }
         }
         catch(Exception e){
