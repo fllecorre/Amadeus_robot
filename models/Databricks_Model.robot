@@ -52,6 +52,24 @@ Get Run Output
     ${run_output}    Get_Value_From_Response_byJsonPath    $.body.notebook_output.result    ${response}
     RETURN     ${run_output}
 
+List Run For A Single Job
+    [Arguments]    ${job_id}
+    &{headers}    Create Dictionary    Authorization=Bearer ${token}   Accept=application/json
+    &{body}    Create Dictionary    job_id=${job_id} 
+    ${response}    GET   ${databricks_url}/${databricks_api_endpoints}[list_run]   query=&{body}    headers=&{headers}  
+    RETURN     ${response}
+
+Get Latest Run For A Single Job
+    [Arguments]    ${job_id}
+    ${response}    List Run For A Single Job    ${job_id}
+    ${run}    Get_Value_From_Response_byJsonPath    $.body.runs.[0]    ${response} 
+    RETURN     ${run}
+
+Check Run Status
+    [Arguments]    ${run}    ${expected_status}    ${job_id}
+    ${life_cycle_state}    Get_Value_From_Response_byJsonPath    $.state.life_cycle_state    ${run} 
+    Should Be Equal As Strings    ${life_cycle_state}    ${expected_status}    msg=run status is not the one expected (actual status = ${life_cycle_state} ; expected status = ${expected_status}, job_id=${job_id} )
+
 Format Run Output
     [Documentation]    Format the databrick run output from a string to a json list
     ...    Parameters :
