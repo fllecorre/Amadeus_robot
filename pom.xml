@@ -50,6 +50,20 @@
 						<goal>run</goal>
 					  </goals>
 					</execution>
+					<execution>
+					  <id>launch_smoke_tests</id>
+					  <phase>validate</phase>
+					  <configuration>
+						<target>
+						  <exec executable="sh">
+							<arg value="scripts/run_smoke_test.sh" />
+						  </exec>
+						</target>
+					  </configuration>
+					  <goals>
+						<goal>run</goal>
+					  </goals>
+					</execution>
                 </executions>
             </plugin>
     </plugins>
