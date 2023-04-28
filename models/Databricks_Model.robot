@@ -40,7 +40,7 @@ Get Run Output
     &{headers}    Create Dictionary    Authorization=Bearer ${token}   Accept=application/json
     &{body}    Create Dictionary    run_id=${run_id} 
     ${run_status}    Set Variable    PENDING
-    WHILE    '${run_status}' != 'TERMINATED'    limit=10
+    WHILE    '${run_status}' != 'TERMINATED'    limit=15
         Log To Console     Waiting for the job run to finish
         ${response}    GET   ${databricks_url}/${databricks_api_endpoints}[get_output]   query=&{body}    headers=&{headers}  
         Log     ${response}
