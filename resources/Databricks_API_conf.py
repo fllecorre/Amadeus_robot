@@ -6,6 +6,6 @@ databricks_api_endpoints = {
     "run_job": "api/2.1/jobs/run-now"
 }
 
-token = 'dapi2083b6ee78ae80da740f313e4d003c79-2'
+token = 'dapi2c25eb07b68fb9d38831df1fc2590be2-2'
 
 exchange_rates_job_id = 948537256776744
