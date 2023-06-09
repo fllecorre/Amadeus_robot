@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ROOT>
+    <SOURCE>Visual Services 7 - XML Generator</SOURCE>
+    <VERSION>1</VERSION>
+    <MESSAGE ID="_113639_M_SPWREQ" TAG="SPWREQ" AGENCY="1A" DOMAIN="SEI" VERSION="09" RELEASE="1" REVISION="13" NAME="SEI Protocol Wrapper Request" STATE="Draft" TYPENAME="SeiProtocolWrapperRequest" SEPARATOR="*" PUBLISHED="false" AREA="290" CHARACTERSET="Default" FUNCTION="" MEANING="">
+        <SEGMENTREF ID="_15811_S_SPWREQ" SMARTNAME="ORG" STATUS="C" REPETITION="1" DESCRIPTION="" XMLCOMMENT="" TAG="ORG" AGENCY="IA" DOMAIN="DSC" VERSION="01" RELEASE="2" REVISION="3" DELEGATED="FALSE" STATE="Draft"/>
+        <SEGMENTREF ID="_20188_S_SPWREQ" SMARTNAME="SPW" STATUS="M" REPETITION="1" DESCRIPTION="Protocol options" XMLCOMMENT="" TAG="SPW" AGENCY="1A" DOMAIN="SEI" VERSION="05" RELEASE="0" REVISION="1" DELEGATED="FALSE" STATE="Certified"/>
+        <SEGMENTREF ID="_63994_S_SPWREQ" SMARTNAME="ATR" STATUS="C" REPETITION="1" DESCRIPTION="Additionnal key/value information" XMLCOMMENT="" TAG="ATR" AGENCY="1A" DOMAIN="SEI" VERSION="09" RELEASE="1" REVISION="1" DELEGATED="FALSE" STATE="Draft"/>
+        <SEGMENTREF ID="_136_S_SPWREQ" SMARTNAME="BLB" STATUS="C" REPETITION="1" DESCRIPTION="Data buffer" XMLCOMMENT="" TAG="BLB" AGENCY="1A" DOMAIN="NGREF" VERSION="02" RELEASE="1" REVISION="3" DELEGATED="FALSE" STATE="Draft"/>
+    </MESSAGE>
+    <GROUPS>
+    </GROUPS>
+    <SEGMENTS>
+        <SEGMENT ID="_63994_S_SPWREQ" TAG="ATR" AGENCY="1A" DOMAIN="SEI" VERSION="09" RELEASE="1" REVISION="1" NAME="ATTRIBUTE" STATE="Draft" TYPENAME="AttributeType" DELEGATED="FALSE" AIBSUFFIX="" FUNCTION="" MEANING="">
+            <DATA ID="_227940_D_SPWREQ" SMARTNAME="criteriaSetType" STATUS="N/A" REPETITION="1" DESCRIPTION="Determines if the set of criteria corresponds to the message identification criteria or to normal criteria." XMLCOMMENT="" DATATYPE="an" XMLTYPE="" MINLEN="1" MAXLEN="3" PROCESSING="n" TAG="9017" AGENCY="UN" VERSION="02" RELEASE="A" REVISION="427" NAME="Attribute function code qualifier" STATE="Draft" FUNCTION="" MEANING="Code qualifying an attribute function." CODED="T" FASTDECODINGFLAG="N" FASTDECODINGID="" EXHAUSTIVE="T">
+                <CODESETS>
+                    <CODESET TAG="1" DESCRIPTION="Member"/>
+                    <CODESET TAG="10" DESCRIPTION="Financial statement"/>
+                    <CODESET TAG="11" DESCRIPTION="Payment manner"/>
+                    <CODESET TAG="12" DESCRIPTION="Loan information"/>
+                    <CODESET TAG="13" DESCRIPTION="Contract"/>
+                    <CODESET TAG="14" DESCRIPTION="Funding"/>
+                    <CODESET TAG="15" DESCRIPTION="Acquisition phase"/>
+                    <CODESET TAG="16" DESCRIPTION="Monetary appropriation"/>
+                    <CODESET TAG="17" DESCRIPTION="Laboratory investigation"/>
+                    <CODESET TAG="18" DESCRIPTION="Clinical investigation"/>
+                    <CODESET TAG="19" DESCRIPTION="Reason for request"/>
+                    <CODESET TAG="2" DESCRIPTION="Person"/>
+                    <CODESET TAG="20" DESCRIPTION="Reason for prescription"/>
+                    <CODESET TAG="21" DESCRIPTION="Comment to prescription"/>
+                    <CODESET TAG="22" DESCRIPTION="Observation"/>
+                    <CODESET TAG="23" DESCRIPTION="Comment to a request"/>
+                    <CODESET TAG="24" DESCRIPTION="Event"/>
+                    <CODESET TAG="3" DESCRIPTION="Array structure component"/>
+                    <CODESET TAG="4" DESCRIPTION="University degree"/>
+                    <CODESET TAG="5" DESCRIPTION="Professional title"/>
+                    <CODESET TAG="6" DESCRIPTION="Courtesy title"/>
+                    <CODESET TAG="7" DESCRIPTION="Directory set definition"/>
+                    <CODESET TAG="8" DESCRIPTION="Structure object attribute"/>
+                    <CODESET TAG="9" DESCRIPTION="Account"/>
+                    <CODESET TAG="ZZZ" DESCRIPTION="Mutually defined"/>
+                </CODESETS>
+            </DATA>
+            <COMPOSITEREF ID="_101442_C_SPWREQ" SMARTNAME="attributeDetails" STATUS="C" REPETITION="50" DESCRIPTION="" XMLCOMMENT="" TAG="E003" AGENCY="UN" VERSION="09" RELEASE="1" REVISION="1" STATE="Draft"/>
+        </SEGMENT>
+        <SEGMENT ID="_136_S_SPWREQ" TAG="BLB" AGENCY="1A" DOMAIN="NGREF" VERSION="02" RELEASE="1" REVISION="3" NAME="BINARY DATA" STATE="Draft" TYPENAME="BinaryDataType" DELEGATED="FALSE" AIBSUFFIX="" FUNCTION="to carry binary data within an Edifact segment" MEANING="to carry binary data within an Edifact segment">
+            <DATA ID="_4056_D_SPWREQ" SMARTNAME="dataLength" STATUS="M" REPETITION="1" DESCRIPTION="Length of 203K" XMLCOMMENT="" DATATYPE="n" XMLTYPE="" MINLEN="1" MAXLEN="15" PROCESSING="n" TAG="6168" AGENCY="IA" VERSION="96" RELEASE="1" REVISION="7" NAME="Length dimension" STATE="Draft" FUNCTION="Length of pieces or packages stated for transport purposes." MEANING="" CODED="F" FASTDECODINGFLAG="N" FASTDECODINGID="">
+            </DATA>
+            <DATA ID="_4479_D_SPWREQ" SMARTNAME="dataType" STATUS="C" REPETITION="1" DESCRIPTION="type of the data" XMLCOMMENT="" DATATYPE="an" XMLTYPE="" MINLEN="1" MAXLEN="1" PROCESSING="n" TAG="116Z" AGENCY="1A" VERSION="01" RELEASE="1" REVISION="4" NAME="DATA TYPE" STATE="Draft" FUNCTION="Type of binary data contained in BLB segment" MEANING="Used to type the binary data" CODED="T" FASTDECODINGFLAG="N" FASTDECODINGID="" EXHAUSTIVE="T">
+                <CODESETS>
+                    <CODESET TAG="B" DESCRIPTION="BINARY DATA"/>
+                    <CODESET TAG="E" DESCRIPTION="EDIFACT DATA"/>
+                </CODESETS>
+            </DATA>
+            <DATA ID="_4932_D_SPWREQ" SMARTNAME="binaryData" STATUS="M" REPETITION="1" DESCRIPTION="used to store binary data" XMLCOMMENT="" DATATYPE="an" XMLTYPE="" MINLEN="1" MAXLEN="9999" PROCESSING="b" TAG="114Z" AGENCY="1A" VERSION="01" RELEASE="1" REVISION="19" NAME="Binary data" STATE="Draft" FUNCTION="to store edifact structured data" MEANING="needs of a data element of 4000 chars" CODED="F" FASTDECODINGFLAG="N" FASTDECODINGID="">
+            </DATA>
+        </SEGMENT>
+        <SEGMENT ID="_15811_S_SPWREQ" TAG="ORG" AGENCY="IA" DOMAIN="DSC" VERSION="01" RELEASE="2" REVISION="3" NAME="ORIGINATOR OF REQUEST DETAILS" STATE="Draft" TYPENAME="OriginatorOfRequestDetailsTypeI" DELEGATED="FALSE" AIBSUFFIX="" FUNCTION="To specify the point of sale details." MEANING="">
+            <COMPOSITEREF ID="_27741_C_SPWREQ" SMARTNAME="deliveringSystem" STATUS="M*" REPETITION="1" DESCRIPTION="Used to specify the originator System" XMLCOMMENT="" TAG="C336" AGENCY="IA" VERSION="01" RELEASE="2" REVISION="195" STATE="Draft"/>
+            <COMPOSITEREF ID="_27739_C_SPWREQ" SMARTNAME="originIdentification" STATUS="M*" REPETITION="1" DESCRIPTION="Originator Identification Details" XMLCOMMENT="" TAG="C300" AGENCY="IA" VERSION="01" RELEASE="2" REVISION="211" STATE="Draft"/>
+            <COMPOSITEREF ID="_27740_C_SPWREQ" SMARTNAME="locationDetails" STATUS="C" REPETITION="1" DESCRIPTION="Details of the location" XMLCOMMENT="" TAG="C328" AGENCY="IA" VERSION="01" RELEASE="2" REVISION="436" STATE="Draft"/>
+            <COMPOSITEREF ID="_27741_C_SPWREQ" SMARTNAME="cascadingSystem" STATUS="C" REPETITION="1" DESCRIPTION="System Details - Used when cascading" XMLCOMMENT="" TAG="C336" AGENCY="IA" VERSION="01" RELEASE="2" REVISION="195" STATE="Draft"/>
+            <DATA ID="_98580_D_SPWREQ" SMARTNAME="originatorTypeCode" STATUS="C" REPETITION="1" DESCRIPTION="Originator Type Code.&#10;A for airline agent.&#10;T for travel Agent.&#10;E for internet." XMLCOMMENT="" DATATYPE="an" XMLTYPE="" MINLEN="1" MAXLEN="1" PROCESSING="n" TAG="9972" AGENCY="IA" VERSION="01" RELEASE="2" REVISION="224" NAME="Originator type code" STATE="Draft" FUNCTION="A code to describe the type of originator, i.e., airline agent, travel agent." MEANING="" CODED="T" FASTDECODINGFLAG="N" FASTDECODINGID="" EXHAUSTIVE="T">
+                <CODESETS>
+                    <CODESET TAG="A" DESCRIPTION="Airline"/>
+                    <CODESET TAG="B" DESCRIPTION="Business (Corporate) account"/>
+                    <CODESET TAG="C" DESCRIPTION="Consolidator"/>
+                    <CODESET TAG="D" DESCRIPTION="Direct consumer"/>
+                    <CODESET TAG="E" DESCRIPTION="Electronic selling system (e.g. Minitel, Compuserve)"/>
+                    <CODESET TAG="G" DESCRIPTION="General Sales Agent"/>
+                    <CODESET TAG="I" DESCRIPTION="Internal CRS locations (sales, development, etc.)"/>
+                    <CODESET TAG="N" DESCRIPTION="Non IATA Agents"/>
+                    <CODESET TAG="P" DESCRIPTION="Pending IATA Agents"/>
+                    <CODESET TAG="S" DESCRIPTION="Self service machine"/>
+                    <CODESET TAG="T" DESCRIPTION="Travel Agent"/>
+                    <CODESET TAG="V" DESCRIPTION="Vendor (car, hotel, airline, travel supplier, etc.)"/>
+                    <CODESET TAG="W" DESCRIPTION="Wholesaler (Tour operator)"/>
+                    <CODESET TAG="X" DESCRIPTION="Bogus subscribers, used for testing"/>
+                </CODESETS>
+            </DATA>
+            <COMPOSITEREF ID="_27742_C_SPWREQ" SMARTNAME="originDetails" STATUS="C" REPETITION="1" DESCRIPTION="Details on the originator" XMLCOMMENT="" TAG="C354" AGENCY="IA" VERSION="01" RELEASE="2" REVISION="154" STATE="Draft"/>
+            <DATA ID="_98579_D_SPWREQ" SMARTNAME="originator" STATUS="C" REPETITION="1" DESCRIPTION="Authority code of the requester&#10;(Area Code)+(Numeric Sine)+(Agent Initials)+(Duty Code)&#10;ex : B0001XVSU)." XMLCOMMENT="" DATATYPE="an" XMLTYPE="" MINLEN="1" MAXLEN="9" PROCESSING="n" TAG="9904" AGENCY="IA" VERSION="01" RELEASE="2" REVISION="393" NAME="Originator's authority request code" STATE="Draft" FUNCTION="A code given to an agent by the originating reservation system." MEANING="" CODED="F" FASTDECODINGFLAG="N" FASTDECODINGID="">
+            </DATA>
+            <DATA ID="_98558_D_SPWREQ" SMARTNAME="communicationNumber" STATUS="C" REPETITION="1" DESCRIPTION="Identifier of the workstation (such as the NNLNIATA)" XMLCOMMENT="" DATATYPE="an" XMLTYPE="" MINLEN="1" MAXLEN="25" PROCESSING="n" TAG="3148" AGENCY="IA" VERSION="01" RELEASE="2" REVISION="421" NAME="Communication number" STATE="Draft" FUNCTION="Complete communication number including country or area code when applicable." MEANING="" CODED="F" FASTDECODINGFLAG="N" FASTDECODINGID="">
+            </DATA>
+            <DATA ID="_98520_D_SPWREQ" SMARTNAME="partyIdentification" STATUS="C" REPETITION="1" DESCRIPTION="Group identification" XMLCOMMENT="" DATATYPE="an" XMLTYPE="" MINLEN="1" MAXLEN="17" PROCESSING="n" TAG="3039" AGENCY="IA" VERSION="01" RELEASE="2" REVISION="337" NAME="Party id identification" STATE="Draft" FUNCTION="Code identifying a party involved in a transaction." MEANING="" CODED="F" FASTDECODINGFLAG="N" FASTDECODINGID="">
+            </DATA>
+        </SEGMENT>
+        <SEGMENT ID="_20188_S_SPWREQ" TAG="SPW" AGENCY="1A" DOMAIN="SEI" VERSION="05" RELEASE="0" REVISION="1" NAME="SEI Protocol Wrapper" STATE="Certified" TYPENAME="SEIProtocolWrapperType" DELEGATED="FALSE" AIBSUFFIX="" FUNCTION="" MEANING="">
+            <COMPOSITEREF ID="_35770_C_SPWREQ" SMARTNAME="originDetails" STATUS="C" REPETITION="1" DESCRIPTION="" XMLCOMMENT="" TAG="C001" AGENCY="1A" VERSION="05" RELEASE="0" REVISION="1" STATE="Certified"/>
+            <COMPOSITEREF ID="_35771_C_SPWREQ" SMARTNAME="destinationDetails" STATUS="C" REPETITION="1" DESCRIPTION="" XMLCOMMENT="" TAG="C002" AGENCY="1A" VERSION="05" RELEASE="0" REVISION="1" STATE="Certified"/>
+            <COMPOSITEREF ID="_35772_C_SPWREQ" SMARTNAME="protocolOptions" STATUS="C" REPETITION="1" DESCRIPTION="" XMLCOMMENT="" TAG="C003" AGENCY="1A" VERSION="05" RELEASE="0" REVISION="1" STATE="Certified"/>
+            <COMPOSITEREF ID="_41686_C_SPWREQ" SMARTNAME="sessionDetails" STATUS="C" REPETITION="1" DESCRIPTION="" XMLCOMMENT="" TAG="C004" AGENCY="1A" VERSION="05" RELEASE="1" REVISION="1" STATE="Certified"/>
+        </SEGMENT>
+    </SEGMENTS>
+    <COMPOSITES>
+        <COMPOSITE ID="_35770_C_SPWREQ" TAG="C001" AGENCY="1A" VERSION="05" RELEASE="0" REVISION="1" NAME="ORIGIN URI" STATE="Certified" TYPENAME="OriginUriType" FUNCTION="" MEANING="">
+            <DATA ID="_125971_D_SPWREQ" SMARTNAME="originURI" STATUS="M" REPETITION="1" DESCRIPTION="" XMLCOMMENT="" DATATYPE="an" XMLTYPE="" MINLEN="1" MAXLEN="255" PROCESSING="n" TAG="0001" AGENCY="1A" VERSION="05" RELEASE="0" REVISION="1" NAME="Identifier of the originator" STATE="Certified" FUNCTION="" MEANING="" CODED="F" FASTDECODINGFLAG="N" FASTDECODINGID="">
+            </DATA>
+        </COMPOSITE>
+        <COMPOSITE ID="_35771_C_SPWREQ" TAG="C002" AGENCY="1A" VERSION="05" RELEASE="0" REVISION="1" NAME="DESTINATION URI" STATE="Certified" TYPENAME="DestinationUriType" FUNCTION="" MEANING="">
+            <DATA ID="_125972_D_SPWREQ" SMARTNAME="destinationURI" STATUS="M" REPETITION="1" DESCRIPTION="" XMLCOMMENT="" DATATYPE="an" XMLTYPE="" MINLEN="1" MAXLEN="255" PROCESSING="n" TAG="0002" AGENCY="1A" VERSION="05" RELEASE="0" REVISION="1" NAME="Identifier of the destination" STATE="Certified" FUNCTION="" MEANING="" CODED="F" FASTDECODINGFLAG="N" FASTDECODINGID="">
+            </DATA>
+            <DATA ID="_125973_D_SPWREQ" SMARTNAME="parameter1" STATUS="C" REPETITION="1" DESCRIPTION="" XMLCOMMENT="" DATATYPE="an" XMLTYPE="" MINLEN="1" MAXLEN="1024" PROCESSING="n" TAG="0003" AGENCY="1A" VERSION="05" RELEASE="0" REVISION="1" NAME="Parameter" STATE="Certified" FUNCTION="" MEANING="" CODED="F" FASTDECODINGFLAG="N" FASTDECODINGID="">
+            </DATA>
+            <DATA ID="_125973_D_SPWREQ" SMARTNAME="parameter2" STATUS="C" REPETITION="1" DESCRIPTION="" XMLCOMMENT="" DATATYPE="an" XMLTYPE="" MINLEN="1" MAXLEN="1024" PROCESSING="n" TAG="0003" AGENCY="1A" VERSION="05" RELEASE="0" REVISION="1" NAME="Parameter" STATE="Certified" FUNCTION="" MEANING="" CODED="F" FASTDECODINGFLAG="N" FASTDECODINGID="">
+            </DATA>
+            <DATA ID="_125973_D_SPWREQ" SMARTNAME="parameter3" STATUS="C" REPETITION="1" DESCRIPTION="" XMLCOMMENT="" DATATYPE="an" XMLTYPE="" MINLEN="1" MAXLEN="1024" PROCESSING="n" TAG="0003" AGENCY="1A" VERSION="05" RELEASE="0" REVISION="1" NAME="Parameter" STATE="Certified" FUNCTION="" MEANING="" CODED="F" FASTDECODINGFLAG="N" FASTDECODINGID="">
+            </DATA>
+        </COMPOSITE>
+        <COMPOSITE ID="_35772_C_SPWREQ" TAG="C003" AGENCY="1A" VERSION="05" RELEASE="0" REVISION="1" NAME="PROTOCOL OPTIONS" STATE="Certified" TYPENAME="ProtocolOptionsType" FUNCTION="" MEANING="">
+            <DATA ID="_125974_D_SPWREQ" SMARTNAME="protocol" STATUS="M" REPETITION="1" DESCRIPTION="" XMLCOMMENT="" DATATYPE="an" XMLTYPE="" MINLEN="1" MAXLEN="10" PROCESSING="n" TAG="0004" AGENCY="1A" VERSION="05" RELEASE="0" REVISION="1" NAME="Origin/Destination Protocol" STATE="Certified" FUNCTION="" MEANING="" CODED="F" FASTDECODINGFLAG="N" FASTDECODINGID="">
+            </DATA>
+            <DATA ID="_125975_D_SPWREQ" SMARTNAME="option1" STATUS="C" REPETITION="1" DESCRIPTION="" XMLCOMMENT="" DATATYPE="an" XMLTYPE="" MINLEN="1" MAXLEN="512" PROCESSING="n" TAG="0005" AGENCY="1A" VERSION="05" RELEASE="0" REVISION="1" NAME="Options" STATE="Certified" FUNCTION="" MEANING="" CODED="F" FASTDECODINGFLAG="N" FASTDECODINGID="">
+            </DATA>
+            <DATA ID="_125975_D_SPWREQ" SMARTNAME="option2" STATUS="C" REPETITION="1" DESCRIPTION="" XMLCOMMENT="" DATATYPE="an" XMLTYPE="" MINLEN="1" MAXLEN="512" PROCESSING="n" TAG="0005" AGENCY="1A" VERSION="05" RELEASE="0" REVISION="1" NAME="Options" STATE="Certified" FUNCTION="" MEANING="" CODED="F" FASTDECODINGFLAG="N" FASTDECODINGID="">
+            </DATA>
+            <DATA ID="_125975_D_SPWREQ" SMARTNAME="option3" STATUS="C" REPETITION="1" DESCRIPTION="" XMLCOMMENT="" DATATYPE="an" XMLTYPE="" MINLEN="1" MAXLEN="512" PROCESSING="n" TAG="0005" AGENCY="1A" VERSION="05" RELEASE="0" REVISION="1" NAME="Options" STATE="Certified" FUNCTION="" MEANING="" CODED="F" FASTDECODINGFLAG="N" FASTDECODINGID="">
+            </DATA>
+            <DATA ID="_125975_D_SPWREQ" SMARTNAME="option4" STATUS="C" REPETITION="1" DESCRIPTION="" XMLCOMMENT="" DATATYPE="an" XMLTYPE="" MINLEN="1" MAXLEN="512" PROCESSING="n" TAG="0005" AGENCY="1A" VERSION="05" RELEASE="0" REVISION="1" NAME="Options" STATE="Certified" FUNCTION="" MEANING="" CODED="F" FASTDECODINGFLAG="N" FASTDECODINGID="">
+            </DATA>
+            <DATA ID="_125975_D_SPWREQ" SMARTNAME="option5" STATUS="C" REPETITION="1" DESCRIPTION="" XMLCOMMENT="" DATATYPE="an" XMLTYPE="" MINLEN="1" MAXLEN="512" PROCESSING="n" TAG="0005" AGENCY="1A" VERSION="05" RELEASE="0" REVISION="1" NAME="Options" STATE="Certified" FUNCTION="" MEANING="" CODED="F" FASTDECODINGFLAG="N" FASTDECODINGID="">
+            </DATA>
+            <DATA ID="_125975_D_SPWREQ" SMARTNAME="option6" STATUS="C" REPETITION="1" DESCRIPTION="" XMLCOMMENT="" DATATYPE="an" XMLTYPE="" MINLEN="1" MAXLEN="512" PROCESSING="n" TAG="0005" AGENCY="1A" VERSION="05" RELEASE="0" REVISION="1" NAME="Options" STATE="Certified" FUNCTION="" MEANING="" CODED="F" FASTDECODINGFLAG="N" FASTDECODINGID="">
+            </DATA>
+            <DATA ID="_125975_D_SPWREQ" SMARTNAME="option7" STATUS="C" REPETITION="1" DESCRIPTION="" XMLCOMMENT="" DATATYPE="an" XMLTYPE="" MINLEN="1" MAXLEN="512" PROCESSING="n" TAG="0005" AGENCY="1A" VERSION="05" RELEASE="0" REVISION="1" NAME="Options" STATE="Certified" FUNCTION="" MEANING="" CODED="F" FASTDECODINGFLAG="N" FASTDECODINGID="">
+            </DATA>
+        </COMPOSITE>
+        <COMPOSITE ID="_41686_C_SPWREQ" TAG="C004" AGENCY="1A" VERSION="05" RELEASE="1" REVISION="1" NAME="SESSION ID" STATE="Certified" TYPENAME="SessionIdType" FUNCTION="" MEANING="">
+            <DATA ID="_144026_D_SPWREQ" SMARTNAME="sessionId" STATUS="M" REPETITION="1" DESCRIPTION="" XMLCOMMENT="" DATATYPE="an" XMLTYPE="" MINLEN="1" MAXLEN="512" PROCESSING="n" TAG="0006" AGENCY="1A" VERSION="05" RELEASE="1" REVISION="1" NAME="SESSION ID" STATE="Certified" FUNCTION="" MEANING="" CODED="F" FASTDECODINGFLAG="N" FASTDECODINGID="">
+            </DATA>
+        </COMPOSITE>
+        <COMPOSITE ID="_27739_C_SPWREQ" TAG="C300" AGENCY="IA" VERSION="01" RELEASE="2" REVISION="211" NAME="ORIGINATOR IDENTIFICATION DETAILS" STATE="Draft" TYPENAME="OriginatorIdentificationDetailsTypeI" FUNCTION="To identify the originator of the travel request." MEANING="">
+            <DATA ID="_98512_D_SPWREQ" SMARTNAME="originatorId" STATUS="C" REPETITION="1" DESCRIPTION="ATA/IATA Id number or pseudo IATA number or ERSP." XMLCOMMENT="" DATATYPE="n" XMLTYPE="" MINLEN="1" MAXLEN="9" PROCESSING="n" TAG="9900" AGENCY="IA" VERSION="01" RELEASE="2" REVISION="235" NAME="Travel agent identification details" STATE="Draft" FUNCTION="A unique ATA/IATA identification number assigned to a travel agent." MEANING="" CODED="F" FASTDECODINGFLAG="N" FASTDECODINGID="">
+            </DATA>
+            <DATA ID="_98513_D_SPWREQ" SMARTNAME="inHouseIdentification1" STATUS="C" REPETITION="1" DESCRIPTION="First In-House Identifier.&#10;Office/Agency code assigned by the reservation system.&#10;Office Id in AMAdeus." XMLCOMMENT="" DATATYPE="an" XMLTYPE="" MINLEN="1" MAXLEN="9" PROCESSING="n" TAG="9902" AGENCY="IA" VERSION="01" RELEASE="2" REVISION="697" NAME="In-house identification" STATE="Draft" FUNCTION="A unique identification number assigned to a travel agent by the travel agent's reservation system." MEANING="" CODED="F" FASTDECODINGFLAG="N" FASTDECODINGID="">
+            </DATA>
+            <DATA ID="_98513_D_SPWREQ" SMARTNAME="inHouseIdentification2" STATUS="C" REPETITION="1" DESCRIPTION="Second In-House Identifier." XMLCOMMENT="" DATATYPE="an" XMLTYPE="" MINLEN="1" MAXLEN="9" PROCESSING="n" TAG="9902" AGENCY="IA" VERSION="01" RELEASE="2" REVISION="697" NAME="In-house identification" STATE="Draft" FUNCTION="A unique identification number assigned to a travel agent by the travel agent's reservation system." MEANING="" CODED="F" FASTDECODINGFLAG="N" FASTDECODINGID="">
+            </DATA>
+            <DATA ID="_98513_D_SPWREQ" SMARTNAME="inHouseIdentification3" STATUS="C" REPETITION="1" DESCRIPTION="Third in-house identifier" XMLCOMMENT="" DATATYPE="an" XMLTYPE="" MINLEN="1" MAXLEN="9" PROCESSING="n" TAG="9902" AGENCY="IA" VERSION="01" RELEASE="2" REVISION="697" NAME="In-house identification" STATE="Draft" FUNCTION="A unique identification number assigned to a travel agent by the travel agent's reservation system." MEANING="" CODED="F" FASTDECODINGFLAG="N" FASTDECODINGID="">
+            </DATA>
+        </COMPOSITE>
+        <COMPOSITE ID="_27740_C_SPWREQ" TAG="C328" AGENCY="IA" VERSION="01" RELEASE="2" REVISION="436" NAME="LOCATION" STATE="Draft" TYPENAME="LocationTypeI" FUNCTION="To identify a location by code or name." MEANING="">
+            <DATA ID="_98515_D_SPWREQ" SMARTNAME="trueLocationId" STATUS="C" REPETITION="1" DESCRIPTION="A 3 character ATA/IATA airport/city code of the agent doing the request.&#10;True city code." XMLCOMMENT="" DATATYPE="an" XMLTYPE="" MINLEN="1" MAXLEN="25" PROCESSING="n" TAG="3225" AGENCY="IA" VERSION="01" RELEASE="2" REVISION="958" NAME="Place/location identification" STATE="Draft" FUNCTION="Identification of the name of place/location, other than 3164 City name." MEANING="Use ATA/IATA defined three letter city code (See IATA Airline Coding Directory 10.8)." CODED="T" FASTDECODINGFLAG="N" FASTDECODINGID="" EXHAUSTIVE="T">
+                <CODESETS>
+                    <CODESET TAG="ARNK" DESCRIPTION="ARNK (for RTG use only)"/>
+                    <CODESET TAG="ZZZ" DESCRIPTION="ZZZ (used to designate all cities)"/>
+                </CODESETS>
+            </DATA>
+            <DATA ID="_98514_D_SPWREQ" SMARTNAME="trueLocation" STATUS="C" REPETITION="1" DESCRIPTION="True location of the agent doing the request." XMLCOMMENT="" DATATYPE="an" XMLTYPE="" MINLEN="1" MAXLEN="17" PROCESSING="n" TAG="3224" AGENCY="IA" VERSION="01" RELEASE="2" REVISION="374" NAME="Place/location" STATE="Draft" FUNCTION="Name of place/location, other than 3164 city name." MEANING="" CODED="F" FASTDECODINGFLAG="N" FASTDECODINGID="">
+            </DATA>
+        </COMPOSITE>
+        <COMPOSITE ID="_27741_C_SPWREQ" TAG="C336" AGENCY="IA" VERSION="01" RELEASE="2" REVISION="195" NAME="SYSTEM DETAILS" STATE="Draft" TYPENAME="SystemDetailsTypeI" FUNCTION="To identify by code or name and location the system that originates or delivers the message for a third party." MEANING="">
+            <DATA ID="_98516_D_SPWREQ" SMARTNAME="companyId" STATUS="M*" REPETITION="1" DESCRIPTION="2-3 characters airline/CRS code, or bilaterally agreed code, of the system that originates the message when different from the originating system." XMLCOMMENT="" DATATYPE="an" XMLTYPE="" MINLEN="1" MAXLEN="35" PROCESSING="n" TAG="9906" AGENCY="IA" VERSION="01" RELEASE="2" REVISION="1472" NAME="Company identification" STATE="Draft" FUNCTION="The coded description of supplier of a service or product, i.e. airline designator code." MEANING="Use ATA/IATA defined 2-3 character airline designator codes, (IATA Airline Coding Directory, Section 3)" CODED="T" FASTDECODINGFLAG="N" FASTDECODINGID="" EXHAUSTIVE="T">
+                <CODESETS>
+                    <CODESET TAG="7YY" DESCRIPTION="Industry fares for all carriers"/>
+                </CODESETS>
+            </DATA>
+            <DATA ID="_98515_D_SPWREQ" SMARTNAME="locationId" STATUS="C" REPETITION="1" DESCRIPTION="3 characters ATA/IATA airport/city code of the originating system." XMLCOMMENT="" DATATYPE="an" XMLTYPE="" MINLEN="1" MAXLEN="25" PROCESSING="n" TAG="3225" AGENCY="IA" VERSION="01" RELEASE="2" REVISION="958" NAME="Place/location identification" STATE="Draft" FUNCTION="Identification of the name of place/location, other than 3164 City name." MEANING="Use ATA/IATA defined three letter city code (See IATA Airline Coding Directory 10.8)." CODED="T" FASTDECODINGFLAG="N" FASTDECODINGID="" EXHAUSTIVE="T">
+                <CODESETS>
+                    <CODESET TAG="ARNK" DESCRIPTION="ARNK (for RTG use only)"/>
+                    <CODESET TAG="ZZZ" DESCRIPTION="ZZZ (used to designate all cities)"/>
+                </CODESETS>
+            </DATA>
+            <DATA ID="_98514_D_SPWREQ" SMARTNAME="location" STATUS="C" REPETITION="1" DESCRIPTION="Location of the originating system." XMLCOMMENT="" DATATYPE="an" XMLTYPE="" MINLEN="1" MAXLEN="17" PROCESSING="n" TAG="3224" AGENCY="IA" VERSION="01" RELEASE="2" REVISION="374" NAME="Place/location" STATE="Draft" FUNCTION="Name of place/location, other than 3164 city name." MEANING="" CODED="F" FASTDECODINGFLAG="N" FASTDECODINGID="">
+            </DATA>
+        </COMPOSITE>
+        <COMPOSITE ID="_27742_C_SPWREQ" TAG="C354" AGENCY="IA" VERSION="01" RELEASE="2" REVISION="154" NAME="ORIGINATOR DETAILS" STATE="Draft" TYPENAME="OriginatorDetailsTypeI" FUNCTION="Characteristics of the originator of a request." MEANING="">
+            <DATA ID="_98517_D_SPWREQ" SMARTNAME="codedCountry" STATUS="C" REPETITION="1" DESCRIPTION="ISO country code of the agent." XMLCOMMENT="" DATATYPE="an" XMLTYPE="" MINLEN="1" MAXLEN="3" PROCESSING="n" TAG="3207" AGENCY="IA" VERSION="01" RELEASE="2" REVISION="898" NAME="Country, coded" STATE="Draft" FUNCTION="Identification of the name of a country or other geographical entity as specified in ISO 3166." MEANING="Use ISO 3166 two alpha country code (See IATA Airline Coding Directory 10.2)." CODED="T" FASTDECODINGFLAG="N" FASTDECODINGID="" EXHAUSTIVE="T">
+                <CODESETS>
+                    <CODESET TAG="001" DESCRIPTION="unable ref to 3207 96.1 IA"/>
+                </CODESETS>
+            </DATA>
+            <DATA ID="_98519_D_SPWREQ" SMARTNAME="codedCurrency" STATUS="C" REPETITION="1" DESCRIPTION="ISO currency code." XMLCOMMENT="" DATATYPE="an" XMLTYPE="" MINLEN="1" MAXLEN="3" PROCESSING="n" TAG="6345" AGENCY="IA" VERSION="01" RELEASE="2" REVISION="358" NAME="Currency, coded" STATE="Draft" FUNCTION="Identification of the name or symbol of the monetary unit involved in the transaction. Note:Use ISO 4217 three alpha code." MEANING="Use ISO 4217 three alpha code.  (See IATA Airline Coding Directory 9.1)." CODED="T" FASTDECODINGFLAG="N" FASTDECODINGID="" EXHAUSTIVE="T">
+                <CODESETS>
+                    <CODESET TAG="777" DESCRIPTION="Neutral Unit of Construction"/>
+                </CODESETS>
+            </DATA>
+            <DATA ID="_98518_D_SPWREQ" SMARTNAME="codedLanguage" STATUS="C" REPETITION="1" DESCRIPTION="ISO code of language." XMLCOMMENT="" DATATYPE="an" XMLTYPE="" MINLEN="1" MAXLEN="3" PROCESSING="n" TAG="3453" AGENCY="IA" VERSION="01" RELEASE="2" REVISION="706" NAME="Language, coded" STATE="Draft" FUNCTION="Code of language (ISO 639-1988)." MEANING="Use ISO 3166 two alpha country code (See Airline Coding Directory 10.3.2)." CODED="T" FASTDECODINGFLAG="N" FASTDECODINGID="" EXHAUSTIVE="T">
+                <CODESETS>
+                </CODESETS>
+            </DATA>
+        </COMPOSITE>
+        <COMPOSITE ID="_101442_C_SPWREQ" TAG="E003" AGENCY="UN" VERSION="09" RELEASE="1" REVISION="1" NAME="ATTRIBUTE INFORMATION" STATE="Draft" TYPENAME="AttributeInformationTypeU" FUNCTION="To identify the type of attribute and the attribute" MEANING="">
+            <DATA ID="_227939_D_SPWREQ" SMARTNAME="attributeType" STATUS="M" REPETITION="1" DESCRIPTION="" XMLCOMMENT="" DATATYPE="an" XMLTYPE="" MINLEN="1" MAXLEN="50" PROCESSING="n" TAG="9021" AGENCY="UN" VERSION="02" RELEASE="A" REVISION="131" NAME="Attribute type identification" STATE="Draft" FUNCTION="" MEANING="" CODED="F" FASTDECODINGFLAG="N" FASTDECODINGID="">
+            </DATA>
+            <DATA ID="_227938_D_SPWREQ" SMARTNAME="attributeDescription" STATUS="C" REPETITION="1" DESCRIPTION="" XMLCOMMENT="" DATATYPE="an" XMLTYPE="" MINLEN="1" MAXLEN="1000" PROCESSING="n" TAG="9018" AGENCY="UN" VERSION="02" RELEASE="A" REVISION="500" NAME="Attribute description" STATE="Draft" FUNCTION="Free form description of an attribute" MEANING="" CODED="F" FASTDECODINGFLAG="N" FASTDECODINGID="">
+            </DATA>
+        </COMPOSITE>
+    </COMPOSITES>
+</ROOT>
+
