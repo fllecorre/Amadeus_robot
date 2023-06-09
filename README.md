@@ -90,9 +90,9 @@
 
 2. **Select the environment**
 
-![Alt text](choose_protocol.png)
+![Alt text](choose_env.png)
 
 3. **Select the protocol**
 
-![Alt text](choose_env.png)
+![Alt text](choose_protocol.png)
 
