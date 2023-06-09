@@ -96,3 +96,8 @@
 
 ![Alt text](choose_protocol.png)
 
+## ***Keywords Documentation***
+
+- [payout](https://static.forge.amadeus.net/utopy/payout-lib/payout-lib.html)
+- [protocols](https://static.forge.amadeus.net/utopy/protocols-lib/protocols-lib.html)
+- [pnr](https://static.forge.amadeus.net/utopy/pnr-lib/pnr-lib.html)
