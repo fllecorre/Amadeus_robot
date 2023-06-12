@@ -1,0 +1,7 @@
+#all the needed dependencies will be automatically installed (including robot framework)
+
+-i https://repository.rnd.amadeus.net/repository/api/pypi/pypi/simple
+protocols-lib
+cyberark-lib
+pnr-lib
+payout-lib
